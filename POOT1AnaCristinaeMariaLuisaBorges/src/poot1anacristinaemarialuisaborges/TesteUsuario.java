@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author anath
+ * @author  Ana Cristina e Maria Luisa
  */
 public class TesteUsuario {
     public static void main(String[] args) {
