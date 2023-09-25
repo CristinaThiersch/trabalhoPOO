@@ -22,6 +22,10 @@ public class Pessoa {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
 
+    public Pessoa() {
+        this.dataCriacao = LocalDateTime.now();
+    }
+
     public int getId() {
         return id;
     }
@@ -80,10 +84,6 @@ public class Pessoa {
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
-    }
-
-    public void setDataCriacao(LocalDateTime dataCriacao) {
-        this.dataCriacao = dataCriacao;
     }
 
     public LocalDateTime getDataModificacao() {

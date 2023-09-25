@@ -3,30 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package poot1anacristinaemarialuisaborges;
+
 import java.time.LocalDateTime;
-import java.util.Date;
+
 /**
  *
  * @author Ana Cristina e Maria Luisa
  */
-public class Alimento {
+public class AlimentoRefeicao {
     private int id;
-    private String nome;
-    private double carboidratos;
+    private Refeicoes refeicao;
+    private Alimento alimento;
+    private double porcao;
     private double proteinas;
     private double gorduras;
-    private String tipoUsuario;
-    private int porcao;
     private double calorias;
-    private  LocalDateTime dataCriacao;
+    private LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
 
-    public Alimento() {
+    public AlimentoRefeicao() {
         this.dataCriacao = LocalDateTime.now();
-    }
-    
-    double calcCalorias(double carboidratos, double proteinas, double gorduras){
-        return this.calorias = (4 * carboidratos) + (4 * proteinas) + (9 * gorduras);
     }
 
     public int getId() {
@@ -37,20 +33,28 @@ public class Alimento {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public Refeicoes getRefeicao() {
+        return refeicao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setRefeicao(Refeicoes refeicao) {
+        this.refeicao = refeicao;
     }
 
-    public double getCarboidratos() {
-        return carboidratos;
+    public Alimento getAlimento() {
+        return alimento;
     }
 
-    public void setCarboidratos(double carboidratos) {
-        this.carboidratos = carboidratos;
+    public void setAlimento(Alimento alimento) {
+        this.alimento = alimento;
+    }
+
+    public double getPorcao() {
+        return porcao;
+    }
+
+    public void setPorcao(double porcao) {
+        this.porcao = porcao;
     }
 
     public double getProteinas() {
@@ -67,22 +71,6 @@ public class Alimento {
 
     public void setGorduras(double gorduras) {
         this.gorduras = gorduras;
-    }
-
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public int getPorcao() {
-        return porcao;
-    }
-
-    public void setPorcao(int porcao) {
-        this.porcao = porcao;
     }
 
     public double getCalorias() {
@@ -104,6 +92,5 @@ public class Alimento {
     public void setDataModificacao(LocalDateTime dataModificacao) {
         this.dataModificacao = dataModificacao;
     }
-    
-    
+
 }

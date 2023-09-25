@@ -3,30 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package poot1anacristinaemarialuisaborges;
+
 import java.time.LocalDateTime;
-import java.util.Date;
+
 /**
  *
  * @author Ana Cristina e Maria Luisa
  */
-public class Alimento {
+public class TipoDieta {
     private int id;
     private String nome;
     private double carboidratos;
     private double proteinas;
     private double gorduras;
-    private String tipoUsuario;
-    private int porcao;
-    private double calorias;
-    private  LocalDateTime dataCriacao;
+    private LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
 
-    public Alimento() {
+    public TipoDieta() {
         this.dataCriacao = LocalDateTime.now();
-    }
-    
-    double calcCalorias(double carboidratos, double proteinas, double gorduras){
-        return this.calorias = (4 * carboidratos) + (4 * proteinas) + (9 * gorduras);
     }
 
     public int getId() {
@@ -42,7 +36,19 @@ public class Alimento {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+    
+        if(this.carboidratos == 40 && this.proteinas == 30 && this.gorduras == 30)
+        {
+            this.nome = "Equilibrada";
+        }else if(this.carboidratos == 30 && this.proteinas == 50 && this.gorduras == 20)
+        {
+            this.nome = "Low Carb";
+        }else if(this.carboidratos == 15 && this.proteinas == 15 && this.gorduras == 70)
+        {
+            this.nome = "Cetogenica";
+        }else{
+            this.nome = "Atleta";
+        }
     }
 
     public double getCarboidratos() {
@@ -69,34 +75,10 @@ public class Alimento {
         this.gorduras = gorduras;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public int getPorcao() {
-        return porcao;
-    }
-
-    public void setPorcao(int porcao) {
-        this.porcao = porcao;
-    }
-
-    public double getCalorias() {
-        return calorias;
-    }
-
-    public void setCalorias(double calorias) {
-        this.calorias = calorias;
-    }
-
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
-
+    
     public LocalDateTime getDataModificacao() {
         return dataModificacao;
     }
@@ -106,4 +88,5 @@ public class Alimento {
     }
     
     
+
 }
