@@ -12,22 +12,21 @@ import java.time.LocalDateTime;
  */
 public class Preferencias {
 
-    private int id;
+    private long id;
     private Pessoa pessoa;
     private Alimento alimento;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
+    private static long serial;
 
     public Preferencias() {
+        Preferencias.serial = Preferencias.serial+1;
+        this.id = Preferencias.serial;
         this.dataCriacao = LocalDateTime.now();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Pessoa getPessoa() {

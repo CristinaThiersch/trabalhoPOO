@@ -11,24 +11,23 @@ import java.time.LocalDateTime;
  * @author Ana Cristina e Maria Luisa
  */
 public class TipoDieta {
-    private int id;
+    private long id;
     private String nome;
     private double carboidratos;
     private double proteinas;
     private double gorduras;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
+    private static long serial;
 
     public TipoDieta() {
+        TipoDieta.serial = TipoDieta.serial + 1;
+        this.id = TipoDieta.serial;
         this.dataCriacao = LocalDateTime.now();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * @author Ana Cristina e Maria Luisa
  */
 public class Refeicoes {
-    private int id;
+    private long id;
     private TipoDieta dieta;
     private double carboidratos;
     private double proteinas;
@@ -20,17 +20,16 @@ public class Refeicoes {
     private String nomeRefeicao;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
+    private static long serial;
 
     public Refeicoes() {
+        Refeicoes.serial = Refeicoes.serial +1;
+        this.id = Refeicoes.serial;
         this.dataCriacao = LocalDateTime.now();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public TipoDieta getDieta() {

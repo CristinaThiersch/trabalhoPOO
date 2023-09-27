@@ -10,7 +10,7 @@ import java.util.Date;
  * @author Ana Cristina e Maria Luisa
  */
 public class Alimento {
-    private int id;
+    private long id;
     private String nome;
     private double carboidratos;
     private double proteinas;
@@ -20,8 +20,11 @@ public class Alimento {
     private double calorias;
     private  LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
+    private static long serial;
 
     public Alimento() {
+        Alimento.serial = Alimento.serial +1;
+        this.id = Alimento.serial;
         this.dataCriacao = LocalDateTime.now();
     }
     
@@ -29,12 +32,8 @@ public class Alimento {
         return this.calorias = (4 * carboidratos) + (4 * proteinas) + (9 * gorduras);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {

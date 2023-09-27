@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 public class Pessoa {
 
-    private int id;
+    private long id;
     private String nome;
     private String sexo;
     private LocalDateTime nascimento;
@@ -21,17 +21,16 @@ public class Pessoa {
     private String tipoUsuario;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
+    private static long serial;
 
     public Pessoa() {
+        Pessoa.serial = Pessoa.serial + 1;
+        this.id = Pessoa.serial;
         this.dataCriacao = LocalDateTime.now();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {

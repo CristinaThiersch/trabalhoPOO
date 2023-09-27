@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 public class RegistroDieta {
 
-    private int id;
+    private long id;
     private Pessoa pessoa;
     private Avaliacao avaliacaoFisica;
     private TipoDieta tipo;
@@ -21,17 +21,16 @@ public class RegistroDieta {
     private int nroRefeicoes;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
+    private static long serial;
 
     public RegistroDieta() {
+        RegistroDieta.serial = RegistroDieta.serial + 1;
+        this.id = RegistroDieta.serial;
         this.dataCriacao = LocalDateTime.now();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Pessoa getPessoa() {

@@ -11,7 +11,8 @@ import java.util.Scanner;
  * @author  Ana Cristina e Maria Luisa
  */
 public class TesteUsuario {
-    public static void main(String[] args) {
+
+    public TesteUsuario() {
         Scanner ler = new Scanner(System.in);
         int opc = 5;
         do {            
@@ -30,5 +31,10 @@ public class TesteUsuario {
                     System.out.println("\n\nOpcao invalida\n\n");
             }
         } while (opc != 0);
+    }
+    
+    
+    public static void main(String[] args) {
+        new TesteUsuario();
     }
 }

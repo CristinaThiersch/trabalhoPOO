@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * @author Ana Cristina e Maria Luisa
  */
 public class AlimentoRefeicao {
-    private int id;
+    private long id;
     private Refeicoes refeicao;
     private Alimento alimento;
     private double porcao;
@@ -20,17 +20,17 @@ public class AlimentoRefeicao {
     private double calorias;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
+    private static long serial;
+    
 
     public AlimentoRefeicao() {
+        AlimentoRefeicao.serial = AlimentoRefeicao.serial +1;
+        this.id = AlimentoRefeicao.serial;
         this.dataCriacao = LocalDateTime.now();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Refeicoes getRefeicao() {
