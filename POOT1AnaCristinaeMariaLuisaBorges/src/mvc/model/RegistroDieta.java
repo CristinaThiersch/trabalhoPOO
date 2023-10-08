@@ -4,7 +4,7 @@
  */
 package mvc.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  *
@@ -19,14 +19,14 @@ public class RegistroDieta {
     private String objetivo;
     private double calorias;
     private int nroRefeicoes;
-    private LocalDateTime dataCriacao;
-    private LocalDateTime dataModificacao;
+    private LocalDate dataCriacao;
+    private LocalDate dataModificacao;
     private static long serial;
 
     public RegistroDieta() {
         RegistroDieta.serial = RegistroDieta.serial + 1;
         this.id = RegistroDieta.serial;
-        this.dataCriacao = LocalDateTime.now();
+        this.dataCriacao = LocalDate.now();
     }
 
     public long getId() {
@@ -90,12 +90,20 @@ public class RegistroDieta {
         this.nroRefeicoes = nroRefeicoes;
     }
 
-    public LocalDateTime getDataCriacao() {
+    public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
-    public LocalDateTime getDataModificacao() {
+    public LocalDate getDataModificacao() {
         return dataModificacao;
+    }
+
+    @Override
+    public String toString() {
+        return "\n========================================"
+                + "\nRegistroDieta{" + "\nid=" + id + "\n pessoa=" + pessoa + "\n avaliacaoFisica=" 
+                + avaliacaoFisica + "\n tipo=" + tipo + "\n objetivo=" + objetivo + "\n calorias=" 
+                + calorias + "\n nroRefeicoes=" + nroRefeicoes + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
     }
 
     @Override

@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package mvc.model;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDate;
+
 /**
  *
  * @author Ana Cristina e Maria Luisa
@@ -15,17 +15,17 @@ public class Alimento {
     private double carboidratos;
     private double proteinas;
     private double gorduras;
-    private String tipoUsuario;
     private int porcao;
     private double calorias;
-    private  LocalDateTime dataCriacao;
-    private LocalDateTime dataModificacao;
+    private  LocalDate dataCriacao;
+    private LocalDate dataModificacao;
     private static long serial;
 
     public Alimento() {
         Alimento.serial = Alimento.serial +1;
         this.id = Alimento.serial;
-        this.dataCriacao = LocalDateTime.now();
+        this.dataCriacao = LocalDate.now();
+        
     }
     
     double calcCalorias(){
@@ -68,14 +68,6 @@ public class Alimento {
         this.gorduras = gorduras;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
     public int getPorcao() {
         return porcao;
     }
@@ -89,14 +81,22 @@ public class Alimento {
         return calorias;
     }
 
-    public LocalDateTime getDataCriacao() {
+    public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
-    public LocalDateTime getDataModificacao() {
+    public LocalDate getDataModificacao() {
         return dataModificacao;
     }
 
+    @Override
+    public String toString() {
+        return "\n========================================"
+                + "\nAlimento{" + "\nid=" + id + "\n nome=" + nome + "\n carboidratos=" + carboidratos + "\n proteinas=" + proteinas + "\n gorduras=" + gorduras + "\n porcao=" + porcao + "\n calorias=" + calorias + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 5;

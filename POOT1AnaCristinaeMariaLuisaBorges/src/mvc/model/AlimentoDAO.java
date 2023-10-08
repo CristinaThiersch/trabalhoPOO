@@ -15,7 +15,6 @@ public class AlimentoDAO {
         Alimento arroz1 = new Alimento();
         arroz1.setNome("Arroz Integral Cozido");
         arroz1.setPorcao(100);
-        arroz1.setTipoUsuario("Admin");
         arroz1.setProteinas(2.6);
         arroz1.setCarboidratos(25.8);
         arroz1.setGorduras(1.0);
@@ -25,12 +24,57 @@ public class AlimentoDAO {
         Alimento arroz2 = new Alimento();
         arroz2.setNome("Arroz cozido");
         arroz2.setPorcao(100);
-        arroz2.setTipoUsuario("Admin");
         arroz2.setProteinas(7.2);
         arroz2.setCarboidratos(78.8);
         arroz2.setGorduras(0.3);
         arroz2.getCalorias();
         this.adiciona(arroz2);
+        
+        Alimento feijao = new Alimento();
+        feijao.setNome("Feijao Carioca cozido");
+        feijao.setPorcao(100);
+        feijao.setProteinas(4.8);
+        feijao.setCarboidratos(13.6);
+        feijao.setGorduras(0.5);
+        feijao.getCalorias();
+        this.adiciona(feijao);
+        
+        Alimento feijao2 = new Alimento();
+        feijao2.setNome("Feijao Tropeiro");
+        feijao2.setPorcao(100);
+        feijao2.setProteinas(10.2);
+        feijao2.setCarboidratos(19.6);
+        feijao2.setGorduras(6.8);
+        feijao2.getCalorias();
+        this.adiciona(feijao2);
+        
+        Alimento feijoada = new Alimento();
+        feijoada.setNome("Feijoada");
+        feijoada.setPorcao(100);
+        feijoada.setProteinas(8.7);
+        feijoada.setCarboidratos(11.6);
+        feijoada.setGorduras(6.5);
+        feijoada.getCalorias();
+        this.adiciona(feijoada);
+        
+        Alimento salada1 = new Alimento();
+        salada1.setNome("Salada de Legumes - Cozida ao Vapor");
+        salada1.setPorcao(100);
+        salada1.setProteinas(2.0);
+        salada1.setCarboidratos(7.1);
+        salada1.setGorduras(0.3);
+        salada1.getCalorias();
+        this.adiciona(salada1);
+        
+        Alimento estrogonofe = new Alimento();
+        estrogonofe.setNome("Estrogonofe de Frango");
+        estrogonofe.setPorcao(100);
+        estrogonofe.setProteinas(17.6);
+        estrogonofe.setCarboidratos(2.6);
+        estrogonofe.setGorduras(8.0);
+        estrogonofe.getCalorias();
+        this.adiciona(estrogonofe);
+        
     }
 
     
@@ -59,7 +103,7 @@ public class AlimentoDAO {
         boolean temAli = false;
         for (Alimento alimento : alimentos) {
             if (alimento != null) {
-                System.out.println(alimento);
+                System.out.println(alimento.toString());
                 temAli = true;
             }
         }

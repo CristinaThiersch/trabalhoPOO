@@ -4,7 +4,7 @@
  */
 package mvc.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  *
@@ -15,14 +15,14 @@ public class Preferencias {
     private long id;
     private Pessoa pessoa;
     private Alimento alimento;
-    private LocalDateTime dataCriacao;
-    private LocalDateTime dataModificacao;
+    private LocalDate dataCriacao;
+    private LocalDate dataModificacao;
     private static long serial;
 
     public Preferencias() {
         Preferencias.serial = Preferencias.serial+1;
         this.id = Preferencias.serial;
-        this.dataCriacao = LocalDateTime.now();
+        this.dataCriacao = LocalDate.now();
     }
 
     public long getId() {
@@ -51,14 +51,20 @@ public class Preferencias {
          */
     }
 
-    public LocalDateTime getDataCriacao() {
+    public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
-    public LocalDateTime getDataModificacao() {
+    public LocalDate getDataModificacao() {
         return dataModificacao;
     }
 
+    @Override
+    public String toString() {
+        return "\n========================================"
+                + "\nPreferencias{" + "\nid=" + id + "\n pessoa=" + pessoa + "\n alimento=" + alimento + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;

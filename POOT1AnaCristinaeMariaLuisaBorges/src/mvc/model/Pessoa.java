@@ -4,7 +4,7 @@
  */
 package mvc.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  *
@@ -15,18 +15,18 @@ public class Pessoa {
     private long id;
     private String nome;
     private String sexo;
-    private LocalDateTime nascimento;
+    private LocalDate nascimento;
     private String login;
     private String senha;
     private String tipoUsuario;
-    private LocalDateTime dataCriacao;
-    private LocalDateTime dataModificacao;
+    private LocalDate dataCriacao;
+    private LocalDate dataModificacao;
     private static long serial;
 
     public Pessoa() {
         Pessoa.serial = Pessoa.serial + 1;
         this.id = Pessoa.serial;
-        this.dataCriacao = LocalDateTime.now();
+        this.dataCriacao = LocalDate.now();
     }
 
     public long getId() {
@@ -49,11 +49,11 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
-    public LocalDateTime getNascimento() {
+    public LocalDate getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(LocalDateTime nascimento) {
+    public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
     }
 
@@ -81,11 +81,11 @@ public class Pessoa {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public LocalDateTime getDataCriacao() {
+    public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
-    public LocalDateTime getDataModificacao() {
+    public LocalDate getDataModificacao() {
         return dataModificacao;
     }
     

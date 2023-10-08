@@ -112,10 +112,6 @@ public class GUIMain {
         int porcao = Integer.parseInt(scanner.nextLine());
         a1.setPorcao(porcao);
         
-        System.out.println("\nTipo de Usuario: ");
-        String tipo = scanner.nextLine();
-        a1.setTipoUsuario(tipo);
-        
         System.out.println("\nProteina: ");
         double proteina = Double.parseDouble(scanner.nextLine());
         a1.setProteinas(proteina);

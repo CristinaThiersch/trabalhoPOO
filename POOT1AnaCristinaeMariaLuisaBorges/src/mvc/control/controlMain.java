@@ -118,6 +118,9 @@ public class controlMain {
                                         case 3:
                                             System.out.println("Buscar Alimento");
                                             break;
+                                        case 4:
+                                            alimentoDAO.mostrarTodos();
+                                            break;
                                         case 10:
                                             break;
                                         default:

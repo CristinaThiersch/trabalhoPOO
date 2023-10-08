@@ -6,8 +6,78 @@ package mvc.model;
 
 /**
  *
- * @author anath
+ * @author Ana Cristina e Maria Luisa
  */
 public class PreferenciasDAO {
+    Preferencias[] preferencias = new Preferencias[50];
     
+    public PreferenciasDAO(){
+        
+    }
+
+    
+    public boolean adiciona(Preferencias preferencia) {
+        int proximaPosicaoLivre = this.proximaPosicaoLivre();
+        if (proximaPosicaoLivre != -1) {
+            preferencias[proximaPosicaoLivre] = preferencia;
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public boolean ehVazio() {
+        for (Preferencias preferencia : preferencias) {
+            if (preferencia != null) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public void mostrarTodos() {
+        boolean temPref = false;
+        for (Preferencias preferencia : preferencias) {
+            if (preferencia != null) {
+                System.out.println(preferencia);
+                temPref = true;
+            }
+        }
+        if (!temPref) {
+            System.out.println("não existe alimento cadastrado");
+        }
+    }
+
+    public Preferencias buscaPorNome(String nome) {
+        for (Preferencias preferencia : preferencias) {
+            if (preferencia != null && preferencia.getAlimento().equals(nome)) {
+                return preferencia;
+            }
+        }
+        return null;
+
+    }
+
+    public boolean remover(String nome) {
+        for (int i = 0; i < preferencias.length; i++) {
+            if (preferencias[i] != null && preferencias[i].getAlimento().equals(nome)) {
+                preferencias[i] = null;
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    private int proximaPosicaoLivre() {
+        for (int i = 0; i < preferencias.length; i++) {
+            if (preferencias[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+
+    }
 }
