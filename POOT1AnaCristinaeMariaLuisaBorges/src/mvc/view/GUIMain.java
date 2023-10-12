@@ -234,7 +234,7 @@ public class GUIMain {
         a1.setBF(a.calculaBF(a1, logada));
 
         a1.setMassaGorda(a.calculaMassaGorda(a1));
-        a1.setMassaMagra(a.calculaMassaMagra(a1));
+        a1.setMassaMagra(a.calculaMassaMagra(a1, logada));
 
         System.out.println(a1.toString());
 

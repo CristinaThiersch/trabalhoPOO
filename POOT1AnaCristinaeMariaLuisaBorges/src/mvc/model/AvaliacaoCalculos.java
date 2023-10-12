@@ -65,10 +65,10 @@ public class AvaliacaoCalculos {
         TMB = fator da taxa de atividade x {655 + [(9,6 x Peso(kg)) + (1,8 x Altura(cm)) – (4,7 x Idade(anos))]}
          */
         double tmb = 0;
-        if (pessoa.getSexo().equals("F")) {
+        if (pessoa.getSexo().equals("M")) {
             tmb = fator * (66 + (13.7 * avaliacao.getPeso())
                     + (5 * avaliacao.getAltura()) - (6.8 * avaliacao.getIdade()));
-        } else if (pessoa.getSexo().equals("M")) {
+        } else if (pessoa.getSexo().equals("F")) {
 
             tmb = fator * (655 + (9.6 * avaliacao.getPeso())
                     + (5 * avaliacao.getAltura()) - (4.7 * avaliacao.getIdade()));
@@ -84,12 +84,12 @@ public class AvaliacaoCalculos {
      */
     public double calculaBF(Avaliacao avaliacao, Pessoa pessoa) {
         double valor = 0;
-        if (pessoa.getSexo().equals("F")) {
+        if (pessoa.getSexo().equals("M")) {
             double x = avaliacao.getCintura() + avaliacao.getQuadril() - avaliacao.getPescoco();
             valor = 163.205 * Math.log10(x)
                     - 97.684 * Math.log10(avaliacao.getAltura()) - 78.387;
-            
-        } else if (pessoa.getSexo().equals("M")) {
+
+        } else if (pessoa.getSexo().equals("F")) {
             double x = avaliacao.getCintura() - avaliacao.getPescoco();
             valor = 86.010 * Math.log10(x)
                     - 70.041 * Math.log10(avaliacao.getAltura()) + 36.76;
@@ -102,8 +102,13 @@ public class AvaliacaoCalculos {
         return mg;
     }
 
-    public double calculaMassaMagra(Avaliacao avaliacao) {
-        double mm = avaliacao.getPeso() - avaliacao.getMassaGorda();
+    public double calculaMassaMagra(Avaliacao avaliacao, Pessoa logada) {
+        double mm = 0;
+        if (logada.getSexo().equals("F")) {
+            mm = avaliacao.getPeso() * (1 - (avaliacao.getBF() / 100));
+        } else if (logada.getSexo().equals("M")) {
+            mm = avaliacao.getPeso() * (100 - avaliacao.getBF()) / 100;
+        }
         return mm;
     }
 
