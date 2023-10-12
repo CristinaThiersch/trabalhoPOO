@@ -27,6 +27,7 @@ public class RegistroDieta {
         RegistroDieta.serial = RegistroDieta.serial + 1;
         this.id = RegistroDieta.serial;
         this.dataCriacao = LocalDate.now();
+        this.dataModificacao = LocalDate.now();
     }
 
     public long getId() {
@@ -64,14 +65,13 @@ public class RegistroDieta {
     public void setObjetivo(String objetivo) {
         this.objetivo = objetivo;
         //DIMINUIR O PESO, MANTER O PESO, MELHORAR COMPOSIÇÃO CORPORAL e AUMENTAR O PESO
-        this.setCalorias();
     }
 
     public double getCalorias() {
         return calorias;
     }
 
-    public void setCalorias() {
+    public void setCalorias(double tmb) {
         if(this.objetivo.equals("DIMINUIR O PESO"))
         {
             this.calorias = tmb - 500;

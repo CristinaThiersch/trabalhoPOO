@@ -26,6 +26,7 @@ public class Refeicoes {
         Refeicoes.serial = Refeicoes.serial +1;
         this.id = Refeicoes.serial;
         this.dataCriacao = LocalDate.now();
+        this.dataModificacao = LocalDate.now();
     }
 
     public long getId() {

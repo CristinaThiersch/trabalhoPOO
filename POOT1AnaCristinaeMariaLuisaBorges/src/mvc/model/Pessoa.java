@@ -27,6 +27,7 @@ public class Pessoa {
         Pessoa.serial = Pessoa.serial + 1;
         this.id = Pessoa.serial;
         this.dataCriacao = LocalDate.now();
+        this.dataModificacao = LocalDate.now();
     }
 
     public long getId() {
@@ -113,7 +114,11 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" + "id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", nascimento=" + nascimento + ", tipoUsuario=" + tipoUsuario + ", dataCriacao=" + dataCriacao + "\n\n" + '}';
+        return "\n========================================"
+                + "\nPessoa{" + "\nid=" + id + "\n nome=" + nome + "\n sexo=" + sexo + "\n nascimento=" 
+                + nascimento + "\n login=" + login + "\n senha=" + senha 
+                + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
     }
+
     
 }

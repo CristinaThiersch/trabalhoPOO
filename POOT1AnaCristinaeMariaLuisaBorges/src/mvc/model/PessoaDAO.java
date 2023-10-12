@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package mvc.model;
+import java.time.LocalDate;
+import java.time.Month;
 import mvc.control.controlMain;
 
 /**
@@ -16,6 +18,7 @@ public class PessoaDAO {
         Pessoa p1 = new Pessoa();
         p1.setNome("Ana");
         p1.setSexo("F");
+        p1.setNascimento(LocalDate.of(1998, Month.AUGUST, 11));
         p1.setTipoUsuario("Admin");
         p1.setLogin("ana");
         p1.setSenha("teste");
@@ -42,7 +45,7 @@ public class PessoaDAO {
         }
         return null;
     }
-    boolean adiciona(Pessoa pessoa) {
+    public boolean adiciona(Pessoa pessoa) {
         int proximaPosicaoLivre = this.proximaPosicaoLivre();
         if (proximaPosicaoLivre != -1) {
             pessoas[proximaPosicaoLivre] = pessoa;

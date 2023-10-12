@@ -3,11 +3,153 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package mvc.model;
-
+import java.time.LocalDate;
+import java.time.Period;
 /**
  *
  * @author Ana Cristina e Maria Luisa
  */
-public class Avaliacao {
+public class Avaliacao{
+    /*id, pessoa, peso, altura, 
+idade, pescoco, cintura, quadril, IMC, TMB, BF, 
+massa gorda kg, massa magra kg, dataCriacao, dataModificacao.*/
+    
+    private long id;
+    private static long serial;
+    private double peso;
+    private double altura;
+    private int idade;
+    private double pescoco;
+    private double cintura;
+    private double quadril;
+    private double massaGorda;
+    private double massaMagra;
+    private double IMC;
+    private double TMB;
+    private double BF;
+    private LocalDate dataCriacao;
+    private LocalDate dataModificacao;
+    private Pessoa pessoa;
+      
+     public Avaliacao(Pessoa pessoa) {
+         this.pessoa = pessoa;
+        Avaliacao.serial = Avaliacao.serial+1;
+        this.id = Avaliacao.serial;
+        this.dataCriacao = LocalDate.now();
+        this.dataModificacao = LocalDate.now();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public double getPescoco() {
+        return pescoco;
+    }
+
+    public void setPescoco(double pescoco) {
+        this.pescoco = pescoco;
+    }
+
+    public double getCintura() {
+        return cintura;
+    }
+
+    public void setCintura(double cintura) {
+        this.cintura = cintura;
+    }
+
+    public double getQuadril() {
+        return quadril;
+    }
+
+    public void setQuadril(double quadril) {
+        this.quadril = quadril;
+    }
+
+    public double getMassaGorda() {
+        return massaGorda;
+    }
+
+    public void setMassaGorda(double massaGorda) {
+        this.massaGorda = massaGorda;
+    }
+
+    public double getMassaMagra() {
+        return massaMagra;
+    }
+
+    public void setMassaMagra(double massaMagra) {
+        this.massaMagra = massaMagra;
+    }
+
+    public double getIMC() {
+        return IMC;
+    }
+
+    public void setIMC(double IMC) {
+        this.IMC = IMC;
+    }
+
+    public double getTMB() {
+        return TMB;
+    }
+
+    public void setTMB(double TMB) {
+        this.TMB = TMB;
+    }
+
+    public double getBF() {
+        return BF;
+    }
+
+    public void setBF(double BF) {
+        this.BF = BF;
+    }
+
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public LocalDate getDataModificacao() {
+        return dataModificacao;
+    }
+
+    public void setDataModificacao(LocalDate dataModificacao) {
+        this.dataModificacao = dataModificacao;
+    }
+
+    @Override
+    public String toString() {
+        return "\n========================================"
+                + "\nAvaliacao{" + "\nid=" + id + "\n peso=" + peso + "\n altura=" + altura + "\n idade=" 
+                + idade + "\n pescoco=" + pescoco + "\n cintura=" + cintura + "\n quadril=" + quadril + "\n massaGorda=" + massaGorda + "\n massaMagra=" + massaMagra 
+                + "\n IMC=" + IMC + "\n TMB=" + TMB + "\n BF=" + BF + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
+    }
+     
     
 }

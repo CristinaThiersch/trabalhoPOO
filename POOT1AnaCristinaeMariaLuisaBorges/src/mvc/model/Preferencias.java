@@ -19,10 +19,12 @@ public class Preferencias {
     private LocalDate dataModificacao;
     private static long serial;
 
-    public Preferencias() {
+    public Preferencias(Pessoa pessoa) {
+        this.pessoa = pessoa;
         Preferencias.serial = Preferencias.serial+1;
         this.id = Preferencias.serial;
         this.dataCriacao = LocalDate.now();
+        this.dataModificacao = LocalDate.now();
     }
 
     public long getId() {
@@ -62,7 +64,7 @@ public class Preferencias {
     @Override
     public String toString() {
         return "\n========================================"
-                + "\nPreferencias{" + "\nid=" + id + "\n pessoa=" + pessoa + "\n alimento=" + alimento + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
+                + "\nPreferencias{" + "\nid=" + id + "\n" + alimento + '}';
     }
     
     @Override

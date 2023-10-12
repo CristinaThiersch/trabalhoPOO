@@ -25,7 +25,7 @@ public class Alimento {
         Alimento.serial = Alimento.serial +1;
         this.id = Alimento.serial;
         this.dataCriacao = LocalDate.now();
-        
+        this.dataModificacao = LocalDate.now();
     }
     
     double calcCalorias(){

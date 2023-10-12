@@ -24,6 +24,7 @@ public class TipoDieta {
         TipoDieta.serial = TipoDieta.serial + 1;
         this.id = TipoDieta.serial;
         this.dataCriacao = LocalDate.now();
+        this.dataModificacao = LocalDate.now();
     }
 
     public long getId() {

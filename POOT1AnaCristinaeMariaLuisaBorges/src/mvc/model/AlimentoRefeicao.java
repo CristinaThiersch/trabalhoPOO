@@ -27,6 +27,7 @@ public class AlimentoRefeicao {
         AlimentoRefeicao.serial = AlimentoRefeicao.serial +1;
         this.id = AlimentoRefeicao.serial;
         this.dataCriacao = LocalDate.now();
+        this.dataModificacao = LocalDate.now();
     }
 
     public long getId() {
