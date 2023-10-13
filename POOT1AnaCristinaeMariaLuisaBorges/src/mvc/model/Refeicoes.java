@@ -20,11 +20,11 @@ public class Refeicoes {
     private String nomeRefeicao;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
-    private static long serial;
+    private static long serialRf;
 
     public Refeicoes() {
-        Refeicoes.serial = Refeicoes.serial +1;
-        this.id = Refeicoes.serial;
+        Refeicoes.serialRf = Refeicoes.serialRf +1;
+        this.id = Refeicoes.serialRf;
         this.dataCriacao = LocalDate.now();
         this.dataModificacao = LocalDate.now();
     }

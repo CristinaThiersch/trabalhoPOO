@@ -5,6 +5,7 @@
 package mvc.model;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Objects;
 /**
  *
  * @author Ana Cristina e Maria Luisa
@@ -15,7 +16,7 @@ idade, pescoco, cintura, quadril, IMC, TMB, BF,
 massa gorda kg, massa magra kg, dataCriacao, dataModificacao.*/
     
     private long id;
-    private static long serial;
+    private static long serialAv;
     private double peso;
     private double altura;
     private int idade;
@@ -32,9 +33,9 @@ massa gorda kg, massa magra kg, dataCriacao, dataModificacao.*/
     private Pessoa pessoa;
       
      public Avaliacao(Pessoa pessoa) {
-         this.pessoa = pessoa;
-        Avaliacao.serial = Avaliacao.serial+1;
-        this.id = Avaliacao.serial;
+        this.pessoa = pessoa;
+        Avaliacao.serialAv = Avaliacao.serialAv+1;
+        this.id = Avaliacao.serialAv;
         this.dataCriacao = LocalDate.now();
         this.dataModificacao = LocalDate.now();
     }
@@ -131,6 +132,10 @@ massa gorda kg, massa magra kg, dataCriacao, dataModificacao.*/
         this.BF = BF;
     }
 
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
     public LocalDate getDataCriacao() {
         return dataCriacao;
     }
@@ -150,6 +155,33 @@ massa gorda kg, massa magra kg, dataCriacao, dataModificacao.*/
                 + idade + "\n pescoco=" + pescoco + "\n cintura=" + cintura + "\n quadril=" + quadril + "\n massaGorda=" + massaGorda + "\n massaMagra=" + massaMagra 
                 + "\n IMC=" + IMC + "\n TMB=" + TMB + "\n BF=" + BF + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
     }
-     
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.pessoa);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Avaliacao other = (Avaliacao) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return Objects.equals(this.pessoa, other.pessoa);
+    }
+   
+
     
 }

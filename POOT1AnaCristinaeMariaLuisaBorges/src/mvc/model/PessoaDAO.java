@@ -12,7 +12,7 @@ import mvc.control.controlMain;
  * @author  Ana Cristina e Maria Luisa
  */
 public class PessoaDAO {
-    Pessoa[] pessoas = new Pessoa[5];
+    Pessoa[] pessoas = new Pessoa[50];
     
     public PessoaDAO(){
         Pessoa p1 = new Pessoa();

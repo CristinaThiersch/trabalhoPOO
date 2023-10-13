@@ -84,12 +84,12 @@ public class AvaliacaoCalculos {
      */
     public double calculaBF(Avaliacao avaliacao, Pessoa pessoa) {
         double valor = 0;
-        if (pessoa.getSexo().equals("M")) {
+        if (pessoa.getSexo().equals("F")) {
             double x = avaliacao.getCintura() + avaliacao.getQuadril() - avaliacao.getPescoco();
             valor = 163.205 * Math.log10(x)
                     - 97.684 * Math.log10(avaliacao.getAltura()) - 78.387;
 
-        } else if (pessoa.getSexo().equals("F")) {
+        } else if (pessoa.getSexo().equals("M")) {
             double x = avaliacao.getCintura() - avaliacao.getPescoco();
             valor = 86.010 * Math.log10(x)
                     - 70.041 * Math.log10(avaliacao.getAltura()) + 36.76;

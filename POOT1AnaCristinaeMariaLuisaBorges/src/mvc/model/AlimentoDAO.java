@@ -4,6 +4,8 @@
  */
 package mvc.model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author  Ana Cristina e Maria Luisa
@@ -116,6 +118,7 @@ public class AlimentoDAO {
         for (Alimento alimento : alimentos) {
             if (alimento != null && alimento.getNome().equals(nome)) {
                 alimento.setNome(novoNome);
+                alimento.setDataModificacao(LocalDate.now());
                 return true;
             }
         }

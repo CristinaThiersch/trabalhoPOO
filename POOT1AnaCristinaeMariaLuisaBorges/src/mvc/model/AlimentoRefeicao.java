@@ -20,12 +20,12 @@ public class AlimentoRefeicao {
     private double calorias;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
-    private static long serial;
+    private static long serialAr;
     
 
     public AlimentoRefeicao() {
-        AlimentoRefeicao.serial = AlimentoRefeicao.serial +1;
-        this.id = AlimentoRefeicao.serial;
+        AlimentoRefeicao.serialAr = AlimentoRefeicao.serialAr +1;
+        this.id = AlimentoRefeicao.serialAr;
         this.dataCriacao = LocalDate.now();
         this.dataModificacao = LocalDate.now();
     }

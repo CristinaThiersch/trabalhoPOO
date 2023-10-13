@@ -4,18 +4,37 @@
  */
 package mvc.model;
 
+import mvc.model.PessoaDAO;
+
 /**
  *
  * @author Ana Cristina e Maria Luisa
  */
 public class AvaliacaoDAO {
+
     Avaliacao[] avaliacoes = new Avaliacao[50];
-            
-    public AvaliacaoDAO(){
-       
+
+    public AvaliacaoDAO() {
+        Pessoa p1 = new Pessoa();
+        PessoaDAO p = new PessoaDAO();
+        p1 = p.buscaPessoaLogin("ana", "teste");
+        Avaliacao a1 = new Avaliacao(p1);
+        AvaliacaoCalculos a = new AvaliacaoCalculos();
+        a1.setAltura(170);
+        a1.setPeso(71);
+        a1.setIdade(a.calculaIdade(p1));
+        a1.setIMC(a.calculaIMC(a1));
+        a1.setTMB(a.calculaTMB(a1, p1, 1.375));
+        a1.setPescoco(34);
+        a1.setCintura(81);
+        a1.setQuadril(102);
+        a1.setBF(a.calculaBF(a1, p1));
+        a1.setMassaGorda(a.calculaMassaGorda(a1));
+        a1.setMassaMagra(a.calculaMassaMagra(a1, p1));
+        
+        this.adiciona(a1);
     }
 
-    
     public boolean adiciona(Avaliacao avaliacao) {
         int proximaPosicaoLivre = this.proximaPosicaoLivre();
         if (proximaPosicaoLivre != -1) {
@@ -37,33 +56,33 @@ public class AvaliacaoDAO {
 
     }
 
-    public void mostrarTodos() {
+    public void mostrarTodos(Pessoa p) {
         boolean tem = false;
         for (Avaliacao avaliacao : avaliacoes) {
-            if (avaliacao != null) {
+            if (avaliacao != null && avaliacao.getPessoa().equals(p)) {
                 System.out.println(avaliacao.toString());
                 tem = true;
             }
         }
         if (!tem) {
-            System.out.println("Não há avaliação física cadastrada.");
+            System.out.println("Nao ha avaliacao fisica cadastrada.");
         }
     }
 
-    /*public boolean alterarID(Long id, Long novoId) {
+    public boolean alterar(Long id, double peso, Pessoa p) {
         for (Avaliacao avaliacao : avaliacoes) {
-            if (avaliacao != null && avaliacao.getId().equals(id)) {
-                avaliacao.setId(novoId);
+            if (avaliacao != null && avaliacao.equals(id) && avaliacao.getPessoa().equals(p)) {
+                avaliacao.setPeso(peso);
                 return true;
             }
         }
         return false;
 
-    }*/
+    }
 
-    public Avaliacao buscaPorID(long id) {
+    public Avaliacao buscaPorID(long id, Pessoa p) {
         for (Avaliacao avaliacao : avaliacoes) {
-            if (avaliacao != null && avaliacao.equals(id)) {
+            if (avaliacao != null && avaliacao.equals(id) && avaliacao.getPessoa().equals(p)) {
                 return avaliacao;
             }
         }

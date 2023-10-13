@@ -21,11 +21,11 @@ public class Pessoa {
     private String tipoUsuario;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
-    private static long serial;
+    private static long serialPe;
 
     public Pessoa() {
-        Pessoa.serial = Pessoa.serial + 1;
-        this.id = Pessoa.serial;
+        Pessoa.serialPe = Pessoa.serialPe + 1;
+        this.id = Pessoa.serialPe;
         this.dataCriacao = LocalDate.now();
         this.dataModificacao = LocalDate.now();
     }

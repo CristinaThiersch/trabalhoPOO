@@ -17,8 +17,8 @@ import mvc.model.Preferencias;
 import mvc.model.PreferenciasDAO;
 import mvc.model.Refeicoes;
 import mvc.model.RefeicoesDAO;
-import mvc.model.RegistroDieta;
-import mvc.model.RegistroDietaDAO;
+import mvc.model.Dieta;
+import mvc.model.DietaDAO;
 import mvc.model.TipoDieta;
 import mvc.model.TipoDietaDAO;
 import mvc.view.GUIMain;
@@ -33,6 +33,8 @@ public class controlMain {
     private PessoaDAO pessoaDAO = new PessoaDAO();
     private AlimentoDAO alimentoDAO = new AlimentoDAO();
     private AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+    private DietaDAO dietaDAO = new DietaDAO();
+    private TipoDietaDAO tipoDAO = new TipoDietaDAO();
     private PreferenciasDAO preferenciasDAO = new PreferenciasDAO();
     Scanner ler = new Scanner(System.in);
 
@@ -76,6 +78,8 @@ public class controlMain {
                                     avaliacao(opcAv, logada);
                                     break;
                                 case 4:
+                                    int opcD = gui.menuDieta();
+                                    dieta(opcD, logada);
                                     break;
                                 case 5:
                                     break;
@@ -131,28 +135,8 @@ public class controlMain {
                                     opc = 0;
                                     break;
                                 case 1:
-                                    System.out.println("INSERIR MENU PESSOA");
-
-                                    break;
-                                case 2:
                                     int opcMenuAlimentos = gui.menuAlimentos();
                                     alimento(opcMenuAlimentos, logada);
-
-                                    break;
-                                case 3:
-                                    System.out.println("INSERIR MENU AVALIACAO");
-                                    break;
-                                case 4:
-                                    System.out.println("INSERIR MENU PREFERENCIAS");
-                                    break;
-                                case 5:
-                                    System.out.println("INSERIR MENU REFEICOES");
-                                    break;
-                                case 6:
-                                    System.out.println("INSERIR MENU REGISTRO DIETA");
-                                    break;
-                                case 7:
-                                    System.out.println("INSERIR MENU TIPO DIETA");
                                     break;
                                 case 10:
                                     break;
@@ -168,7 +152,6 @@ public class controlMain {
 
                 default:
                     gui.invalido();
-
             }
         } while (opc != 0);
     }
@@ -213,7 +196,7 @@ public class controlMain {
 
                 }
                 break;
-                case 10:
+            case 10:
                 break;
             default:
                 gui.invalido();
@@ -283,32 +266,59 @@ public class controlMain {
     }
 
     private void avaliacao(int opcAv, Pessoa logada) {
-        
+
         switch (opcAv) {
             case 1:
-                
                 Avaliacao avaliacao = gui.criaAvaliacao(logada);
                 break;
             case 2:
-                avaliacaoDAO.mostrarTodos();
+                avaliacaoDAO.mostrarTodos(logada);
                 break;
             case 3:
-                //long idBusca = gui.alterarAvaliacao(avaliacao);
-                break;
-            case 4:
-                long id = gui.excluirAvaliacao();
-                if(avaliacaoDAO.remover(id)){
-                    System.out.println("\nAvaliacao " + id + " excluida com sucesso!");
-                }else
-                {
+                long idBusca = gui.pegaIDavaliacao();
+                Avaliacao alterar = avaliacaoDAO.buscaPorID(idBusca, logada);
+                if (alterar != null) {
+                    double novoPeso = gui.alterarAvaliacao(alterar);
+                    if (avaliacaoDAO.alterar(idBusca, novoPeso, logada)) {
+                        System.out.println("\nAlteracao feita com sucesso! ");
+                    } else {
+                        gui.erro();
+
+                    }
+
+                } else {
                     gui.erro();
                 }
                 break;
-                case 10:
+            case 4:
+                long id = gui.excluirAvaliacao();
+                if (avaliacaoDAO.remover(id)) {
+                    System.out.println("\nAvaliacao " + id + " excluida com sucesso!");
+                } else {
+                    gui.erro();
+                }
+                break;
+            case 10:
                 break;
             default:
                 gui.invalido();
         }
+    }
+
+    private void dieta(int opcD, Pessoa logada) {
+        TipoDieta tipo = criaTipoDieta(opcD);
+        if(tipoDAO.adiciona(tipo))
+        {
+            System.out.println("\nTipo de dieta adicionado");
+            int opcObj = gui.menuObjetivoDieta();
+            DietaDAO dieta = gui.criaDieta(opcObj, logada, avaliacao, tipo);
+        }
+    }
+    
+    private TipoDieta criaTipoDieta(int opc) {
+       TipoDieta tipo = new TipoDieta();
+       tipo.setNome(opc);
+       return tipo;
     }
 
 }

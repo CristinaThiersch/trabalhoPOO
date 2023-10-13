@@ -9,9 +9,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import mvc.model.Alimento;
 import mvc.model.Avaliacao;
+import mvc.model.Dieta;
 import mvc.model.Pessoa;
 import mvc.model.Preferencias;
 import mvc.model.AvaliacaoCalculos;
+import mvc.model.TipoDieta;
+import mvc.model.TipoDietaDAO;
 
 /**
  *
@@ -45,7 +48,7 @@ public class GUIMain {
         builder.append("\n1 - Visualizar cadastro");
         builder.append("\n2 - Alterar Cadastro");
         builder.append("\n3 - Avaliacao Fisica");
-        builder.append("\n4 - Registro Dieta");
+        builder.append("\n4 - Dieta");
         builder.append("\n5 - Refeicoes");
         builder.append("\n6 - Preferencias");
         builder.append("\n7 - Excluir conta");
@@ -70,13 +73,7 @@ public class GUIMain {
 
         builder.append("TRABALHO POO - ADMIN\n\n");
         builder.append("0 - Para sair do programa");
-        builder.append("\n1 - Menu Pessoas");
-        builder.append("\n2 - Menu Alimentos");
-        builder.append("\n3 - Menu Avaliacao Fisica");
-        builder.append("\n4 - Menu Preferencias");
-        builder.append("\n5 - Menu Refeicoes");
-        builder.append("\n6 - Menu Registro Dieta");
-        builder.append("\n7 - Menu Tipo Dieta");
+        builder.append("\n1 - Menu Alimentos");
         builder.append("\nQual sua opcao ? R: ");
         System.out.println(builder.toString());
 
@@ -303,7 +300,7 @@ public class GUIMain {
     public long excluirAvaliacao() {
         long id = -1;
         System.out.println("\nExcluir uma avaliacao fisica ira prejudicar o seu historico, "
-                + "tem certeza que deseja excluir uma avaliacao fisica? \n1 - Sim\n 2 - Cancelar");
+                + "tem certeza que deseja excluir uma avaliacao fisica? \n1 - Sim\n2 - Cancelar");
         System.out.println("\nQual sua opcao ? R: ");
         int opc = Integer.parseInt(scanner.nextLine());
 
@@ -316,9 +313,47 @@ public class GUIMain {
         return id;
     }
 
-    public long alterarAvaliacao(Avaliacao avaliacao) {
+    public long pegaIDavaliacao() {
         long id = 0;
-
+        System.out.println("\nInforme o ID da avaliacao fisica que deseja alterar: ");
+        id =  Long.parseLong(scanner.nextLine());
         return id;
+    }
+
+    public double alterarAvaliacao(Avaliacao alterar) {
+        System.out.println("\nInforme o peso a ser alterado na avaliacao fisica " + alterar.getId() + ": ");
+        double peso = Double.parseDouble(scanner.nextLine());
+        return peso;
+    }
+
+    public int menuDieta() {
+        StringBuilder builder = new StringBuilder("");
+        builder.append("\n\nMENU DIETA");
+        builder.append("\nQual o tipo de dieta voce ira fazer agora: ");
+        builder.append("\n1 - Equilibrada;");
+        builder.append("\n2 - Low Carb;");
+        builder.append("\n3 - Cetogênica;");
+         builder.append("\nQual sua opcao ? R: ");
+        System.out.println(builder.toString());
+        int opc = Integer.parseInt(scanner.nextLine());
+        return opc;
+            }
+
+    public int menuObjetivoDieta() {
+        StringBuilder builder = new StringBuilder("");
+        builder.append("\n\nQual o objetivo da sua dieta? ");
+        builder.append("\n1 - Diminuir o peso;");
+        builder.append("\n2 - Manter o peso;");
+        builder.append("\n3 - Aumentar o peso;");
+         builder.append("\nQual sua opcao ? R: ");
+        System.out.println(builder.toString());
+        int opc = Integer.parseInt(scanner.nextLine());
+        return opc;
+    }
+    
+    public Dieta criaDieta(int opcObj, Pessoa logada, Avaliacao av, TipoDieta tipo){
+        Dieta dieta = new Dieta(logada, av, tipo);
+        
+        return dieta;
     }
 }

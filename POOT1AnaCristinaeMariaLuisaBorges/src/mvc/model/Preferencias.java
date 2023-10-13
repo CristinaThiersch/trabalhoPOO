@@ -17,12 +17,12 @@ public class Preferencias {
     private Alimento alimento;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
-    private static long serial;
+    private static long serialPr;
 
     public Preferencias(Pessoa pessoa) {
         this.pessoa = pessoa;
-        Preferencias.serial = Preferencias.serial+1;
-        this.id = Preferencias.serial;
+        Preferencias.serialPr = Preferencias.serialPr+1;
+        this.id = Preferencias.serialPr;
         this.dataCriacao = LocalDate.now();
         this.dataModificacao = LocalDate.now();
     }

@@ -19,11 +19,11 @@ public class Alimento {
     private double calorias;
     private  LocalDate dataCriacao;
     private LocalDate dataModificacao;
-    private static long serial;
+    private static long serialAl;
 
     public Alimento() {
-        Alimento.serial = Alimento.serial +1;
-        this.id = Alimento.serial;
+        Alimento.serialAl = Alimento.serialAl +1;
+        this.id = Alimento.serialAl;
         this.dataCriacao = LocalDate.now();
         this.dataModificacao = LocalDate.now();
     }
@@ -88,6 +88,12 @@ public class Alimento {
     public LocalDate getDataModificacao() {
         return dataModificacao;
     }
+
+    public void setDataModificacao(LocalDate dataModificacao) {
+        this.dataModificacao = dataModificacao;
+    }
+    
+    
 
     @Override
     public String toString() {

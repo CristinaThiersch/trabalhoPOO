@@ -18,11 +18,11 @@ public class TipoDieta {
     private double gorduras;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
-    private static long serial;
+    private static long serialT;
 
     public TipoDieta() {
-        TipoDieta.serial = TipoDieta.serial + 1;
-        this.id = TipoDieta.serial;
+        TipoDieta.serialT = TipoDieta.serialT + 1;
+        this.id = TipoDieta.serialT;
         this.dataCriacao = LocalDate.now();
         this.dataModificacao = LocalDate.now();
     }
@@ -35,19 +35,26 @@ public class TipoDieta {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(int opc) {
     
-        if(this.carboidratos == 40 && this.proteinas == 30 && this.gorduras == 30)
+        if(opc == 1)
         {
             this.nome = "Equilibrada";
-        }else if(this.carboidratos == 30 && this.proteinas == 50 && this.gorduras == 20)
+            this.setCarboidratos(40);
+            this.setProteinas(30);
+            this.setGorduras(30);
+        }else if(opc == 2)
         {
-            this.nome = "Low Carb";
-        }else if(this.carboidratos == 15 && this.proteinas == 15 && this.gorduras == 70)
+            this.nome = "Low Carb";          
+            this.setCarboidratos(30);
+            this.setProteinas(50);
+            this.setGorduras(20);
+        }else if(opc == 3)
         {
             this.nome = "Cetogenica";
-        }else{
-            this.nome = "Atleta";
+            this.setCarboidratos(15);
+            this.setProteinas(15);
+            this.setGorduras(70);
         }
     }
 
