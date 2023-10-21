@@ -13,7 +13,10 @@ import mvc.model.Dieta;
 import mvc.model.Pessoa;
 import mvc.model.Preferencias;
 import mvc.model.AvaliacaoCalculos;
+import mvc.model.AvaliacaoDAO;
 import mvc.model.DietaDAO;
+import mvc.model.PessoaDAO;
+import mvc.model.Refeicoes;
 import mvc.model.TipoDieta;
 import mvc.model.TipoDietaDAO;
 
@@ -50,9 +53,8 @@ public class GUIMain {
         builder.append("\n2 - Alterar Cadastro");
         builder.append("\n3 - Avaliacao Fisica");
         builder.append("\n4 - Dieta");
-        builder.append("\n5 - Refeicoes");
-        builder.append("\n6 - Preferencias");
-        builder.append("\n7 - Excluir conta");
+        builder.append("\n5 - Preferencias");
+        builder.append("\n6 - Excluir conta");
         builder.append("\nQual sua opcao ? R: ");
         System.out.println(builder.toString());
 
@@ -332,7 +334,9 @@ public class GUIMain {
         builder.append("\n\nMENU DIETA");
         builder.append("\n1- Adicionar Dieta");
         builder.append("\n2 - Consultar Dieta");
-        builder.append("\n3 - Excluir Dieta");
+        builder.append("\n3 - Adiocionar refeicao");
+        builder.append("\n4 - Consultar refeicoes");        
+        builder.append("\n5 - Excluir Dieta");
         builder.append("\nQual sua opcao ? R: ");
         System.out.println(builder.toString());
         int opc = Integer.parseInt(scanner.nextLine());
@@ -382,7 +386,7 @@ public class GUIMain {
 
     public long pegaAvaliacao() {
         long id = 0;
-        System.out.println("\nInforme o ID da avaliacao fisica para essa dieta: ");
+        System.out.println("\nDas avaliacoes acima, informe o ID da avaliacao fisica para essa dieta: ");
         id = Long.parseLong(scanner.nextLine());
         return id;
     }
@@ -390,6 +394,66 @@ public class GUIMain {
     public long excluirDieta() {
         long id = 0;
         System.out.println("\nInforme o ID da dieta para excluir: ");
+        id = Long.parseLong(scanner.nextLine());
+        return id;
+    }
+
+    public int menuRefeicao() {
+        StringBuilder builder = new StringBuilder("");
+        builder.append("\n\nQual a refeicao que esta fazendo: ");
+        builder.append("\n1 - Cafe da manha;");
+        builder.append("\n2 - Almoco;");
+        builder.append("\n3 - Cafe da tarde;");
+        builder.append("\n4 - Janta;");
+        builder.append("\n5 - Ceia;");
+        builder.append("\nQual sua opcao ? R: ");
+        System.out.println(builder.toString());
+        int opc = Integer.parseInt(scanner.nextLine());
+        return opc;
+    }
+
+    public Refeicoes criaRefeicao(int opcRe, Dieta dieta) {
+       Refeicoes refeicao = new Refeicoes();
+       refeicao.setDieta(dieta);
+       refeicao.setNomeRefeicao(opcRe);
+       switch (dieta.getNroRefeicoes()) {
+            case 3:
+                refeicao.setCalorias(dieta.getCalorias()/3);
+                break;
+            case 4:
+                refeicao.setCalorias(dieta.getCalorias()/4);
+                break;
+            case 5:
+                refeicao.setCalorias(dieta.getCalorias()/5);
+                break;
+        }
+        switch (dieta.getTipo().getNome()) {
+            case "Equilibrada":
+                refeicao.setCarbMAX(refeicao.getCalorias()*0.40);
+                refeicao.setProMAX(refeicao.getCalorias()*0.30);
+                refeicao.setGordMAX(refeicao.getCalorias()*0.30);           
+                break;
+            case "Low Carb":
+                refeicao.setCarbMAX(refeicao.getCalorias()*0.30);
+                refeicao.setProMAX(refeicao.getCalorias()*0.50);
+                refeicao.setGordMAX(refeicao.getCalorias()*0.20);
+                break;
+            case "Cetogenica":
+                refeicao.setCarbMAX(refeicao.getCalorias()*0.15);
+                refeicao.setProMAX(refeicao.getCalorias()*0.15);
+                refeicao.setGordMAX(refeicao.getCalorias()*0.70);
+                break;
+        }
+        refeicao.setCarboidratos(0);
+        refeicao.setGorduras(0);
+        refeicao.setProteinas(0);
+        
+       return refeicao;
+    }
+
+    public long pegaDieta() {
+        long id = 0;
+        System.out.println("\nDas dietas acima, informe o ID da dieta que esta seguindo atualmente: ");
         id = Long.parseLong(scanner.nextLine());
         return id;
     }

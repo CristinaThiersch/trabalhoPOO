@@ -12,10 +12,13 @@ import java.time.LocalDate;
  */
 public class Refeicoes {
     private long id;
-    private TipoDieta dieta;
+    private Dieta dieta;
     private double carboidratos;
+    private double carbMAX;
     private double proteinas;
+    private double proMAX;
     private double gorduras;
+    private double gordMAX;
     private double calorias;
     private String nomeRefeicao;
     private LocalDate dataCriacao;
@@ -33,12 +36,36 @@ public class Refeicoes {
         return id;
     }
 
-    public TipoDieta getDieta() {
+    public Dieta getDieta() {
         return dieta;
     }
 
-    public void setDieta(TipoDieta dieta) {
+    public void setDieta(Dieta dieta) {
         this.dieta = dieta;
+    }
+
+    public double getCarbMAX() {
+        return carbMAX;
+    }
+
+    public void setCarbMAX(double carbMAX) {
+        this.carbMAX = carbMAX;
+    }
+
+    public double getProMAX() {
+        return proMAX;
+    }
+
+    public void setProMAX(double proMAX) {
+        this.proMAX = proMAX;
+    }
+
+    public double getGordMAX() {
+        return gordMAX;
+    }
+
+    public void setGordMAX(double gordMAX) {
+        this.gordMAX = gordMAX;
     }
 
     public double getCarboidratos() {
@@ -77,8 +104,25 @@ public class Refeicoes {
         return nomeRefeicao;
     }
 
-    public void setNomeRefeicao(String nomeRefeicao) {
-        this.nomeRefeicao = nomeRefeicao;
+    public void setNomeRefeicao(int opc) {
+        switch (opc) {
+            case 1:
+                this.nomeRefeicao = "Cafe da manha";
+                break;
+            case 2:
+                this.nomeRefeicao = "Almoco";
+                break;
+            case 3:
+                this.nomeRefeicao = "Cafe da tarde";
+                break;
+            case 4:
+                this.nomeRefeicao = "Janta";
+                break;
+            case 5:
+                this.nomeRefeicao = "Ceia";
+                break;
+        }
+        
         // café da manhã, almoço, café da tarde, janta, ceia ou outro nome.
 
     }
@@ -94,9 +138,9 @@ public class Refeicoes {
     @Override
     public String toString() {
         return "\n========================================"
-                + "\nRefeicoes{" + "\nid=" + id + "\n dieta=" + dieta + "\n carboidratos=" + carboidratos 
+                + "\nRefeicoes{" + "\nid=" + id + "\n nomeRefeicao=" + nomeRefeicao + "\n dieta=" + dieta.getTipo().getNome() + "\n carboidratos=" + carboidratos 
                 + "\n proteinas=" + proteinas + "\n gorduras=" + gorduras + "\n calorias=" + calorias 
-                + "\n nomeRefeicao=" + nomeRefeicao + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
+                + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
     }
 
     @Override

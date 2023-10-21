@@ -9,13 +9,13 @@ package mvc.model;
  * @author Ana Cristina e Maria Luisa
  */
 public class DietaDAO {
+
     Dieta[] registros = new Dieta[50];
-    
-    public DietaDAO(){
+
+    public DietaDAO() {
         
     }
 
-    
     public boolean adiciona(Dieta registro) {
         int proximaPosicaoLivre = this.proximaPosicaoLivre();
         if (proximaPosicaoLivre != -1) {
@@ -41,18 +41,18 @@ public class DietaDAO {
         boolean temReg = false;
         for (Dieta registro : registros) {
             if (registro != null && registro.getPessoa().equals(p)) {
-                System.out.println(registro);
+                System.out.println(registro.toString());
                 temReg = true;
             }
         }
         if (!temReg) {
-            System.out.println("não existe registro cadastrad");
+            System.out.println("nao existe dieta cadastrada");
         }
     }
 
     public Dieta buscaPorID(long id) {
         for (Dieta registro : registros) {
-            if (registro != null && registro.equals(id)) {
+            if (registro != null && registro.getId() == id) {
                 return registro;
             }
         }

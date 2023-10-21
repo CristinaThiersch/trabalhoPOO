@@ -35,6 +35,7 @@ public class controlMain {
     private AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
     private DietaDAO dietaDAO = new DietaDAO();
     private TipoDietaDAO tipoDAO = new TipoDietaDAO();
+    private RefeicoesDAO refeicoesDAO = new RefeicoesDAO();
     private PreferenciasDAO preferenciasDAO = new PreferenciasDAO();
     Scanner scanner = new Scanner(System.in);
 
@@ -82,14 +83,10 @@ public class controlMain {
                                     dieta(opcD, logada);
                                     break;
                                 case 5:
-                                    
-                                    break;
-                                case 6:
                                     int opcPref = gui.menuPreferencias();
                                     preferencia(opcPref, logada);
-
                                     break;
-                                case 7:
+                                case 6:
                                     String resp = gui.excluiPessoa(logada);
                                     if (pessoaDAO.remover(resp)) {
                                         System.out.println("\nConta excluida com sucesso!");
@@ -316,19 +313,40 @@ public class controlMain {
                 if (tipoDAO.adiciona(tipo)) {
                     System.out.println("\nTipo de dieta adicionado");
                     int opcObj = gui.menuObjetivoDieta();
+                    avaliacaoDAO.mostrarTodos(logada);
                     long idAv = gui.pegaAvaliacao();
                     Avaliacao avaliacao = avaliacaoDAO.buscaPorID(idAv);
-                    Dieta dieta = gui.criaDieta(opcObj, logada, avaliacao, tipo);
-                    dietaDAO.adiciona(dieta);
+                    if (avaliacao != null) {
+                        Dieta dieta = gui.criaDieta(opcObj, logada, avaliacao, tipo);
+                        dietaDAO.adiciona(dieta);
+                    } else {
+                        System.out.println("\nAvaliacao invalida!\n Consulte as avaliacoes disponiveis e tente novamente...");
+                    }
+
                 }
                 break;
             case 2:
                 dietaDAO.mostrarTodos(logada);
                 break;
             case 3:
+                dietaDAO.mostrarTodos(logada);
+                long id = gui.pegaDieta();
+                Dieta dieta = dietaDAO.buscaPorID(id);
+
+                if (dieta != null) {
+                    int opcRe = gui.menuRefeicao();
+                    refeicao(opcRe, logada, dieta);
+                } else {
+                    System.out.println("\nDieta invalida! Consulte as dietas disponiveis e tente novamente");
+                }
+                break;
+            case 4:
+                refeicoesDAO.mostrarTodos();
+                break;
+            case 5:
                 long idDieta = gui.excluirDieta();
                 dietaDAO.remover(idDieta);
-                break;               
+                break;
             default:
                 gui.erro();
         }
@@ -341,4 +359,12 @@ public class controlMain {
         return tipo;
     }
 
+    private void refeicao(int opcRe, Pessoa logada, Dieta dieta) {
+        System.out.println("Cheguei aqui");
+        Refeicoes refeicao = gui.criaRefeicao(opcRe, dieta);
+        if (refeicoesDAO.adiciona(refeicao)) {
+            System.out.println("FOI");
+        }
+
+    }
 }

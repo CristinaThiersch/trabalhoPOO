@@ -41,24 +41,13 @@ public class RefeicoesDAO {
         boolean temRef = false;
         for (Refeicoes refeicao : refeicoes) {
             if (refeicao != null) {
-                System.out.println(refeicao);
+                System.out.println(refeicao.toString());
                 temRef = true;
             }
         }
         if (!temRef) {
-            System.out.println("não existe refeicao cadastrada");
+            System.out.println("nao existe refeicao cadastrada");
         }
-    }
-
-    public boolean alterarNome(String nome, String novoNome) {
-        for (Refeicoes refeicao : refeicoes) {
-            if (refeicao != null && refeicao.getNomeRefeicao().equals(nome)) {
-                refeicao.setNomeRefeicao(novoNome);
-                return true;
-            }
-        }
-        return false;
-
     }
 
     public Refeicoes buscaPorNome(String nome) {

@@ -64,7 +64,7 @@ public class Preferencias {
     @Override
     public String toString() {
         return "\n========================================"
-                + "\nPreferencias{" + "\nid=" + id + "\n" + alimento + '}';
+                + "\nPreferencias{" + "\nid=" + id + "\n" + alimento.getNome() + '}';
     }
     
     @Override

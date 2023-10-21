@@ -116,8 +116,7 @@ public class Dieta {
     @Override
     public String toString() {
         return "\n========================================"
-                + "\nRegistroDieta{" + "\nid=" + id + "\n pessoa=" + pessoa + "\n avaliacaoFisica=" 
-                + avaliacaoFisica + "\n tipo=" + tipo + "\n objetivo=" + objetivo + "\n calorias=" 
+                + "\nDieta{" + "\nid=" + id + "\n tipo=" + tipo.getNome() + "\n objetivo=" + objetivo + "\n calorias=" 
                 + calorias + "\n nroRefeicoes=" + nroRefeicoes + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
     }
 

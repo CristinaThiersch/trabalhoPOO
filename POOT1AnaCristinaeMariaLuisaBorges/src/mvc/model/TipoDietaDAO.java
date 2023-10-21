@@ -12,7 +12,10 @@ public class TipoDietaDAO {
     TipoDieta[] tiposDietas = new TipoDieta[50];
     
     public TipoDietaDAO(){
-       
+       TipoDieta tipo1 = new TipoDieta();
+       tipo1.setNome(1);
+       //equilibrada
+        this.adiciona(tipo1);
     }
 
     
@@ -50,9 +53,9 @@ public class TipoDietaDAO {
         }
     }
 
-    public TipoDieta buscaPorNome(String nome) {
+    public TipoDieta buscaPorID(long id) {
         for (TipoDieta tipo : tiposDietas) {
-            if (tipo != null && tipo.getNome().equals(nome)) {
+            if (tipo != null && tipo.getId() == id) {
                 return tipo;
             }
         }
