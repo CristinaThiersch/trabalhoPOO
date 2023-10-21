@@ -50,17 +50,6 @@ public class TipoDietaDAO {
         }
     }
 
-    public boolean alterarNome(String nome, String novoNome) {
-        for (TipoDieta tipo : tiposDietas) {
-            if (tipo != null && tipo.getNome().equals(nome)) {
-                tipo.setNome(novoNome);
-                return true;
-            }
-        }
-        return false;
-
-    }
-
     public TipoDieta buscaPorNome(String nome) {
         for (TipoDieta tipo : tiposDietas) {
             if (tipo != null && tipo.getNome().equals(nome)) {

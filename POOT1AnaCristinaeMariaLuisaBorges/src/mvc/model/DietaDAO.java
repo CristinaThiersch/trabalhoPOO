@@ -37,10 +37,10 @@ public class DietaDAO {
 
     }
 
-    public void mostrarTodos() {
+    public void mostrarTodos(Pessoa p) {
         boolean temReg = false;
         for (Dieta registro : registros) {
-            if (registro != null) {
+            if (registro != null && registro.getPessoa().equals(p)) {
                 System.out.println(registro);
                 temReg = true;
             }

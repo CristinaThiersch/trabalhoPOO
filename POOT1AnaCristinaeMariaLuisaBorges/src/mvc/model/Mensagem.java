@@ -12,8 +12,8 @@ import java.time.LocalDate;
  */
 public class Mensagem {
      private long id;
-    private String pessoaOrigem;
-    private String pessoaDestino;
+    private Pessoa pessoaOrigem;
+    private Pessoa pessoaDestino;
     private String mensagem;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
@@ -26,19 +26,19 @@ public class Mensagem {
         this.dataModificacao = LocalDate.now();
     }
 
-    public String getPessoaOrigem() {
+    public Pessoa getPessoaOrigem() {
         return pessoaOrigem;
     }
 
-    public void setPessoaOrigem(String pessoaOrigem) {
+    public void setPessoaOrigem(Pessoa pessoaOrigem) {
         this.pessoaOrigem = pessoaOrigem;
     }
 
-    public String getPessoaDestino() {
+    public Pessoa getPessoaDestino() {
         return pessoaDestino;
     }
 
-    public void setPessoaDestino(String pessoaDestino) {
+    public void setPessoaDestino(Pessoa pessoaDestino) {
         this.pessoaDestino = pessoaDestino;
     }
 

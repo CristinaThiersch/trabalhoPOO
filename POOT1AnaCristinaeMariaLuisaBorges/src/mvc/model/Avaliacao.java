@@ -158,9 +158,8 @@ massa gorda kg, massa magra kg, dataCriacao, dataModificacao.*/
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 37 * hash + Objects.hashCode(this.pessoa);
+        int hash = 7;
+        hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -176,11 +175,10 @@ massa gorda kg, massa magra kg, dataCriacao, dataModificacao.*/
             return false;
         }
         final Avaliacao other = (Avaliacao) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return Objects.equals(this.pessoa, other.pessoa);
+        return this.id == other.id;
     }
+
+    
    
 
     

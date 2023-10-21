@@ -65,8 +65,20 @@ public class Dieta {
         return objetivo;
     }
 
-    public void setObjetivo(String objetivo) {
-        this.objetivo = objetivo;
+    public void setObjetivo(int obj) {
+        switch (obj) {
+            case 1:
+                this.objetivo = "Diminuir o peso";
+                break;
+            case 2:
+                this.objetivo = "Manter o peso";
+                break;
+            case 3:
+                this.objetivo = "Aumentar o peso";
+                break;
+            default:
+                break;
+        }
         //DIMINUIR O PESO, MANTER O PESO, MELHORAR COMPOSIÇÃO CORPORAL e AUMENTAR O PESO
     }
 
@@ -75,12 +87,12 @@ public class Dieta {
     }
 
     public void setCalorias(double tmb) {
-        if(this.objetivo.equals("DIMINUIR O PESO"))
+        if(this.objetivo.equals("Diminuir o peso"))
         {
             this.calorias = tmb - 500;
-        }else if(this.objetivo.equals("MANTER O PESO")){
+        }else if(this.objetivo.equals("Manter o peso")){
             this.calorias = tmb;
-        }else if(this.objetivo.equals("GANHAR PESO")){
+        }else if(this.objetivo.equals("Aumentar o peso")){
                 this.calorias = tmb + 500;
         }     
     }

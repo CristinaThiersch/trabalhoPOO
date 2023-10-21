@@ -36,7 +36,7 @@ public class controlMain {
     private DietaDAO dietaDAO = new DietaDAO();
     private TipoDietaDAO tipoDAO = new TipoDietaDAO();
     private PreferenciasDAO preferenciasDAO = new PreferenciasDAO();
-    Scanner ler = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
     public controlMain() {
 
@@ -82,6 +82,7 @@ public class controlMain {
                                     dieta(opcD, logada);
                                     break;
                                 case 5:
+                                    
                                     break;
                                 case 6:
                                     int opcPref = gui.menuPreferencias();
@@ -163,6 +164,7 @@ public class controlMain {
     private void preferencia(int opc, Pessoa logada) {
         switch (opc) {
             case 1:
+                alimentoDAO.mostrarTodos();
                 String nomeAlimento = gui.criarPreferencia();
                 Alimento buscaNome = alimentoDAO.buscaPorNome(nomeAlimento);
                 if (buscaNome == null) {
@@ -270,13 +272,14 @@ public class controlMain {
         switch (opcAv) {
             case 1:
                 Avaliacao avaliacao = gui.criaAvaliacao(logada);
+                avaliacaoDAO.adiciona(avaliacao);
                 break;
             case 2:
                 avaliacaoDAO.mostrarTodos(logada);
                 break;
             case 3:
                 long idBusca = gui.pegaIDavaliacao();
-                Avaliacao alterar = avaliacaoDAO.buscaPorID(idBusca, logada);
+                Avaliacao alterar = avaliacaoDAO.buscaPorID(idBusca);
                 if (alterar != null) {
                     double novoPeso = gui.alterarAvaliacao(alterar);
                     if (avaliacaoDAO.alterar(idBusca, novoPeso, logada)) {
@@ -306,19 +309,36 @@ public class controlMain {
     }
 
     private void dieta(int opcD, Pessoa logada) {
-        TipoDieta tipo = criaTipoDieta(opcD);
-        if(tipoDAO.adiciona(tipo))
-        {
-            System.out.println("\nTipo de dieta adicionado");
-            int opcObj = gui.menuObjetivoDieta();
-            DietaDAO dieta = gui.criaDieta(opcObj, logada, avaliacao, tipo);
+        switch (opcD) {
+            case 1:
+                int opcTipoD = gui.objDieta();
+                TipoDieta tipo = criaTipoDieta(opcTipoD);
+                if (tipoDAO.adiciona(tipo)) {
+                    System.out.println("\nTipo de dieta adicionado");
+                    int opcObj = gui.menuObjetivoDieta();
+                    long idAv = gui.pegaAvaliacao();
+                    Avaliacao avaliacao = avaliacaoDAO.buscaPorID(idAv);
+                    Dieta dieta = gui.criaDieta(opcObj, logada, avaliacao, tipo);
+                    dietaDAO.adiciona(dieta);
+                }
+                break;
+            case 2:
+                dietaDAO.mostrarTodos(logada);
+                break;
+            case 3:
+                long idDieta = gui.excluirDieta();
+                dietaDAO.remover(idDieta);
+                break;               
+            default:
+                gui.erro();
         }
+
     }
-    
+
     private TipoDieta criaTipoDieta(int opc) {
-       TipoDieta tipo = new TipoDieta();
-       tipo.setNome(opc);
-       return tipo;
+        TipoDieta tipo = new TipoDieta();
+        tipo.setNome(opc);
+        return tipo;
     }
 
 }

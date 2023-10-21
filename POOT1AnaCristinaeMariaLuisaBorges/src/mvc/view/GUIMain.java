@@ -13,6 +13,7 @@ import mvc.model.Dieta;
 import mvc.model.Pessoa;
 import mvc.model.Preferencias;
 import mvc.model.AvaliacaoCalculos;
+import mvc.model.DietaDAO;
 import mvc.model.TipoDieta;
 import mvc.model.TipoDietaDAO;
 
@@ -316,7 +317,7 @@ public class GUIMain {
     public long pegaIDavaliacao() {
         long id = 0;
         System.out.println("\nInforme o ID da avaliacao fisica que deseja alterar: ");
-        id =  Long.parseLong(scanner.nextLine());
+        id = Long.parseLong(scanner.nextLine());
         return id;
     }
 
@@ -329,15 +330,26 @@ public class GUIMain {
     public int menuDieta() {
         StringBuilder builder = new StringBuilder("");
         builder.append("\n\nMENU DIETA");
+        builder.append("\n1- Adicionar Dieta");
+        builder.append("\n2 - Consultar Dieta");
+        builder.append("\n3 - Excluir Dieta");
+        builder.append("\nQual sua opcao ? R: ");
+        System.out.println(builder.toString());
+        int opc = Integer.parseInt(scanner.nextLine());
+        return opc;
+    }
+
+    public int objDieta() {
+        StringBuilder builder = new StringBuilder("");
         builder.append("\nQual o tipo de dieta voce ira fazer agora: ");
         builder.append("\n1 - Equilibrada;");
         builder.append("\n2 - Low Carb;");
         builder.append("\n3 - Cetogênica;");
-         builder.append("\nQual sua opcao ? R: ");
+        builder.append("\nQual sua opcao ? R: ");
         System.out.println(builder.toString());
         int opc = Integer.parseInt(scanner.nextLine());
         return opc;
-            }
+    }
 
     public int menuObjetivoDieta() {
         StringBuilder builder = new StringBuilder("");
@@ -345,15 +357,40 @@ public class GUIMain {
         builder.append("\n1 - Diminuir o peso;");
         builder.append("\n2 - Manter o peso;");
         builder.append("\n3 - Aumentar o peso;");
-         builder.append("\nQual sua opcao ? R: ");
+        builder.append("\nQual sua opcao ? R: ");
         System.out.println(builder.toString());
         int opc = Integer.parseInt(scanner.nextLine());
         return opc;
     }
-    
-    public Dieta criaDieta(int opcObj, Pessoa logada, Avaliacao av, TipoDieta tipo){
+
+    public Dieta criaDieta(int opcObj, Pessoa logada, Avaliacao av, TipoDieta tipo) {
         Dieta dieta = new Dieta(logada, av, tipo);
-        
+        dieta.setObjetivo(opcObj);
+        StringBuilder builder = new StringBuilder("");
+        builder.append("\n\nQuantas refeicoes ira fazer ao dia?");
+        builder.append("\n3 - três refeicoes;");
+        builder.append("\n4 - quatro refeicoes;");
+        builder.append("\n5 - cinco refeicoes;");
+        builder.append("\nQual sua opcao ? R: ");
+        System.out.println(builder.toString());
+        int numRef = Integer.parseInt(scanner.nextLine());
+        dieta.setNroRefeicoes(numRef);
+        dieta.setCalorias(av.getTMB());
+
         return dieta;
+    }
+
+    public long pegaAvaliacao() {
+        long id = 0;
+        System.out.println("\nInforme o ID da avaliacao fisica para essa dieta: ");
+        id = Long.parseLong(scanner.nextLine());
+        return id;
+    }
+
+    public long excluirDieta() {
+        long id = 0;
+        System.out.println("\nInforme o ID da dieta para excluir: ");
+        id = Long.parseLong(scanner.nextLine());
+        return id;
     }
 }

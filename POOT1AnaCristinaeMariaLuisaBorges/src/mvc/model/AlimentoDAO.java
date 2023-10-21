@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * @author  Ana Cristina e Maria Luisa
  */
 public class AlimentoDAO {
-    Alimento[] alimentos = new Alimento[50];
+    Alimento[] alimentos = new Alimento[100];
     
     public AlimentoDAO(){
         Alimento arroz1 = new Alimento();
@@ -76,6 +76,143 @@ public class AlimentoDAO {
         estrogonofe.setGorduras(8.0);
         estrogonofe.getCalorias();
         this.adiciona(estrogonofe);
+        
+        Alimento bifeContra = new Alimento();
+        bifeContra.setNome("Bife contra-file grelhado");
+        bifeContra.setPorcao(100);
+        bifeContra.setProteinas(32.4);
+        bifeContra.setCarboidratos(0);
+        bifeContra.setGorduras(15.5);
+        bifeContra.getCalorias();
+        this.adiciona(bifeContra);
+        
+        Alimento fileFrango = new Alimento();
+        fileFrango.setNome("File de frango grelhado");
+        fileFrango.setPorcao(100);
+        fileFrango.setProteinas(31.02);
+        fileFrango.setCarboidratos(0);
+        fileFrango.setGorduras(3.57);
+        fileFrango.getCalorias();
+        this.adiciona(fileFrango);
+        
+        Alimento carneMoida = new Alimento();
+        carneMoida.setNome("Carne moida cozida (acem)");
+        carneMoida.setPorcao(100);
+        carneMoida.setProteinas(26.7);
+        carneMoida.setCarboidratos(0);
+        carneMoida.setGorduras(10.9);
+        carneMoida.getCalorias();
+        this.adiciona(carneMoida);
+        
+        Alimento almondega = new Alimento();
+        almondega.setNome("Almondega frita");
+        almondega.setPorcao(100);
+        almondega.setProteinas(18.2);
+        almondega.setCarboidratos(14.3);
+        almondega.setGorduras(15.8);
+        almondega.getCalorias();
+        this.adiciona(almondega);
+        
+        Alimento banana = new Alimento();
+        banana.setNome("Banana prata");
+        banana.setPorcao(100);
+        banana.setProteinas(1.3);
+        banana.setCarboidratos(26.0);
+        banana.setGorduras(0.1);
+        banana.getCalorias();
+        this.adiciona(banana);
+        
+        Alimento maca = new Alimento();
+        maca.setNome("Maca fuji");
+        maca.setPorcao(100);
+        maca.setProteinas(0.3);
+        maca.setCarboidratos(15.2);
+        maca.setGorduras(0);
+        maca.getCalorias();
+        this.adiciona(maca);
+        
+        Alimento laranja = new Alimento();
+        laranja.setNome("Laranja pera");
+        laranja.setPorcao(100);
+        laranja.setProteinas(1.0);
+        laranja.setCarboidratos(8.9);
+        laranja.setGorduras(0.1);
+        laranja.getCalorias();
+        this.adiciona(laranja);
+        
+        Alimento mamao = new Alimento();
+        mamao.setNome("Mamao papaia");
+        mamao.setPorcao(100);
+        mamao.setProteinas(0.5);
+        mamao.setCarboidratos(10.4);
+        mamao.setGorduras(0.1);
+        mamao.getCalorias();
+        this.adiciona(mamao);
+        
+        Alimento melancia = new Alimento();
+        melancia.setNome("Melancia");
+        melancia.setPorcao(100);
+        melancia.setProteinas(0.9);
+        melancia.setCarboidratos(8.1);
+        melancia.setGorduras(0);
+        melancia.getCalorias();
+        this.adiciona(melancia);
+        
+        Alimento uva = new Alimento();
+        uva.setNome("Uva rubi");
+        uva.setPorcao(100);
+        uva.setProteinas(0.6);
+        uva.setCarboidratos(12.7);
+        uva.setGorduras(0.2);
+        uva.getCalorias();
+        this.adiciona(uva);
+        
+        Alimento leite = new Alimento();
+        leite.setNome("Leite com achocolatado");
+        leite.setPorcao(100);
+        leite.setProteinas(2.1);
+        leite.setCarboidratos(14.2);
+        leite.setGorduras(2.2);
+        leite.getCalorias();
+        this.adiciona(leite);
+        
+        Alimento iogurte = new Alimento();
+        iogurte.setNome("Iogurte natural");
+        iogurte.setPorcao(100);
+        iogurte.setProteinas(4.1);
+        iogurte.setCarboidratos(1.9);
+        iogurte.setGorduras(3.0);
+        iogurte.getCalorias();
+        this.adiciona(iogurte);
+        
+        Alimento queijo = new Alimento();
+        queijo.setNome("Queijo minas frescal");
+        queijo.setPorcao(100);
+        queijo.setProteinas(17.4);
+        queijo.setCarboidratos(3.2);
+        queijo.setGorduras(20.2);
+        queijo.getCalorias();
+        this.adiciona(queijo);
+        
+        Alimento cafe = new Alimento();
+        cafe.setNome("Cafe");
+        cafe.setPorcao(100);
+        cafe.setProteinas(0.7);
+        cafe.setCarboidratos(1.5);
+        cafe.setGorduras(0.1);
+        cafe.getCalorias();
+        this.adiciona(cafe);
+        
+        Alimento omelete = new Alimento();
+        omelete.setNome("Omelete de queijo");
+        omelete.setPorcao(100);
+        omelete.setProteinas(15.6);
+        omelete.setCarboidratos(0.4);
+        omelete.setGorduras(22.0);
+        omelete.getCalorias();
+        this.adiciona(omelete);
+        
+        Alimento ovo = new Alimento();
         
     }
 

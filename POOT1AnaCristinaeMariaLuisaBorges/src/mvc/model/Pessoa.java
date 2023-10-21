@@ -5,6 +5,7 @@
 package mvc.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  *
@@ -89,11 +90,12 @@ public class Pessoa {
     public LocalDate getDataModificacao() {
         return dataModificacao;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.login);
+        hash = 71 * hash + Objects.hashCode(this.senha);
         return hash;
     }
 
@@ -109,8 +111,13 @@ public class Pessoa {
             return false;
         }
         final Pessoa other = (Pessoa) obj;
-        return this.id == other.id;
+        if (!Objects.equals(this.login, other.login)) {
+            return false;
+        }
+        return Objects.equals(this.senha, other.senha);
     }
+    
+    
 
     @Override
     public String toString() {

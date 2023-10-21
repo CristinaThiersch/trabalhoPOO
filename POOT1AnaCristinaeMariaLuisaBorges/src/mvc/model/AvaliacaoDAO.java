@@ -57,14 +57,14 @@ public class AvaliacaoDAO {
     }
 
     public void mostrarTodos(Pessoa p) {
-        boolean tem = false;
+        boolean temAv = false;
         for (Avaliacao avaliacao : avaliacoes) {
             if (avaliacao != null && avaliacao.getPessoa().equals(p)) {
                 System.out.println(avaliacao.toString());
-                tem = true;
+                temAv = true;
             }
         }
-        if (!tem) {
+        if (!temAv) {
             System.out.println("Nao ha avaliacao fisica cadastrada.");
         }
     }
@@ -80,9 +80,9 @@ public class AvaliacaoDAO {
 
     }
 
-    public Avaliacao buscaPorID(long id, Pessoa p) {
+    public Avaliacao buscaPorID(long id) {
         for (Avaliacao avaliacao : avaliacoes) {
-            if (avaliacao != null && avaliacao.equals(id) && avaliacao.getPessoa().equals(p)) {
+            if (avaliacao != null && avaliacao.getId() == id) {
                 return avaliacao;
             }
         }
