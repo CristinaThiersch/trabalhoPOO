@@ -14,10 +14,12 @@ public class AvaliacaoDAO {
 
     Avaliacao[] avaliacoes = new Avaliacao[50];
 
-    public AvaliacaoDAO() {
-        Pessoa p1 = new Pessoa();
-        PessoaDAO p = new PessoaDAO();
-        p1 = p.buscaPessoaLogin("ana", "teste");
+    public AvaliacaoDAO(){
+        
+    }
+    
+    public AvaliacaoDAO(PessoaDAO p) {
+        Pessoa p1 = p.buscaPessoaLogin("ana", "teste");
         Avaliacao a1 = new Avaliacao(p1);
         AvaliacaoCalculos a = new AvaliacaoCalculos();
         a1.setAltura(170);

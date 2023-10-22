@@ -149,7 +149,7 @@ public class Refeicoes {
         return "\n========================================"
                 + "\nRefeicoes{" + "\nid=" + id + "\n nomeRefeicao=" + nomeRefeicao + "\n dieta=" + dieta.getTipo().getNome() + "\n carboidratos=" + carboidratos 
                 + "\n proteinas=" + proteinas + "\n gorduras=" + gorduras + "\n calorias=" + calorias 
-                + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
+                + "\n CaloriasMax="+ caloriaMAX + "\ndataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
     }
 
     @Override

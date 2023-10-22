@@ -33,9 +33,9 @@ public class controlMain {
     private PessoaDAO pessoaDAO = new PessoaDAO();
     private AlimentoDAO alimentoDAO = new AlimentoDAO();
     private AlimentoRefeicaoDAO alimRefDAO = new AlimentoRefeicaoDAO();
-    private AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
-    private DietaDAO dietaDAO = new DietaDAO();
+    private AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO(pessoaDAO);
     private TipoDietaDAO tipoDAO = new TipoDietaDAO();
+    private DietaDAO dietaDAO = new DietaDAO(pessoaDAO, avaliacaoDAO, tipoDAO);
     private RefeicoesDAO refeicoesDAO = new RefeicoesDAO();
     private PreferenciasDAO preferenciasDAO = new PreferenciasDAO();
     Scanner scanner = new Scanner(System.in);
@@ -362,17 +362,15 @@ public class controlMain {
 
     private void refeicao(int opcRe, Pessoa logada, Dieta dieta) {
         Refeicoes refeicao = gui.criaRefeicao(opcRe, dieta);
-        
+
         if (refeicoesDAO.adiciona(refeicao)) {
             alimentoDAO.mostrarTodos();
-            while(refeicao.getCalorias() <= refeicao.getCaloriaMAX())
-            {
-                if(alimRefDAO.adiciona(gui.criaAlimentoRefeicao(refeicao)))
-                {
+            while (refeicao.getCalorias() <= refeicao.getCaloriaMAX()) {
+                if (alimRefDAO.adiciona(gui.criaAlimentoRefeicao(refeicao))) {
                     System.out.println("\nAlimento adicionado a refeicao, calculando se você ainda pode comer mais nessa refeicao...");
-                    System.out.println(refeicao.toString() + "\n" );
+                    System.out.println(refeicao.toString() + "\n");
                     alimRefDAO.mostrarTodos();
-                }else{
+                } else {
                     System.out.println("\nAlgo deu errado, tente novamente");
                 }
             }

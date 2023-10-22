@@ -14,8 +14,20 @@ public class DietaDAO {
 
     public DietaDAO() {
     }
-    
-    
+
+    public DietaDAO(PessoaDAO p, AvaliacaoDAO av, TipoDietaDAO tipoDAO) {
+        Pessoa p1 = p.buscaPessoaLogin("ana", "teste");
+        Avaliacao a1 = av.buscaPorID(1);
+        TipoDieta tipo1 = tipoDAO.buscaPorID(1);
+
+        Dieta registro1 = new Dieta(p1, a1, tipo1);
+        registro1.setNroRefeicoes(5);
+        registro1.setObjetivo(1);
+        //Diminuir o peso
+        registro1.setCalorias(a1.getTMB());
+
+        this.adiciona(registro1);
+    }
 
     public boolean adiciona(Dieta registro) {
         int proximaPosicaoLivre = this.proximaPosicaoLivre();
