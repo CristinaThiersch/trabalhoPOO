@@ -41,7 +41,7 @@ public class AlimentoRefeicaoDAO {
         boolean temAli = false;
         for (AlimentoRefeicao alimentoRefeicao : alimentosRefeicao) {
             if (alimentoRefeicao != null) {
-                System.out.println(alimentoRefeicao);
+                System.out.println(alimentoRefeicao.toString());
                 temAli = true;
             }
         }

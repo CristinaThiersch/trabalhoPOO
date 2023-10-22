@@ -32,6 +32,7 @@ public class controlMain {
     GUIMain gui = new GUIMain();
     private PessoaDAO pessoaDAO = new PessoaDAO();
     private AlimentoDAO alimentoDAO = new AlimentoDAO();
+    private AlimentoRefeicaoDAO alimRefDAO = new AlimentoRefeicaoDAO();
     private AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
     private DietaDAO dietaDAO = new DietaDAO();
     private TipoDietaDAO tipoDAO = new TipoDietaDAO();
@@ -360,10 +361,21 @@ public class controlMain {
     }
 
     private void refeicao(int opcRe, Pessoa logada, Dieta dieta) {
-        System.out.println("Cheguei aqui");
         Refeicoes refeicao = gui.criaRefeicao(opcRe, dieta);
+        
         if (refeicoesDAO.adiciona(refeicao)) {
-            System.out.println("FOI");
+            alimentoDAO.mostrarTodos();
+            while(refeicao.getCalorias() <= refeicao.getCaloriaMAX())
+            {
+                if(alimRefDAO.adiciona(gui.criaAlimentoRefeicao(refeicao)))
+                {
+                    System.out.println("\nAlimento adicionado a refeicao, calculando se você ainda pode comer mais nessa refeicao...");
+                    System.out.println(refeicao.toString() + "\n" );
+                    alimRefDAO.mostrarTodos();
+                }else{
+                    System.out.println("\nAlgo deu errado, tente novamente");
+                }
+            }
         }
 
     }

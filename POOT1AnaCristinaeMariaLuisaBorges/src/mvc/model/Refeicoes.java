@@ -20,6 +20,7 @@ public class Refeicoes {
     private double gorduras;
     private double gordMAX;
     private double calorias;
+    private double caloriaMAX;
     private String nomeRefeicao;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
@@ -42,6 +43,14 @@ public class Refeicoes {
 
     public void setDieta(Dieta dieta) {
         this.dieta = dieta;
+    }
+
+    public double getCaloriaMAX() {
+        return caloriaMAX;
+    }
+
+    public void setCaloriaMAX(double caloriaMAX) {
+        this.caloriaMAX = caloriaMAX;
     }
 
     public double getCarbMAX() {

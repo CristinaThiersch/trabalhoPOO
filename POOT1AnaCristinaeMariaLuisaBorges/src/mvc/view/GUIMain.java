@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import mvc.model.Alimento;
+import mvc.model.AlimentoDAO;
+import mvc.model.AlimentoRefeicao;
+import mvc.model.AlimentoRefeicaoDAO;
 import mvc.model.Avaliacao;
 import mvc.model.Dieta;
 import mvc.model.Pessoa;
@@ -418,13 +421,13 @@ public class GUIMain {
        refeicao.setNomeRefeicao(opcRe);
        switch (dieta.getNroRefeicoes()) {
             case 3:
-                refeicao.setCalorias(dieta.getCalorias()/3);
+                refeicao.setCaloriaMAX(dieta.getCalorias()/3);
                 break;
             case 4:
-                refeicao.setCalorias(dieta.getCalorias()/4);
+                refeicao.setCaloriaMAX(dieta.getCalorias()/4);
                 break;
             case 5:
-                refeicao.setCalorias(dieta.getCalorias()/5);
+                refeicao.setCaloriaMAX(dieta.getCalorias()/5);
                 break;
         }
         switch (dieta.getTipo().getNome()) {
@@ -456,5 +459,24 @@ public class GUIMain {
         System.out.println("\nDas dietas acima, informe o ID da dieta que esta seguindo atualmente: ");
         id = Long.parseLong(scanner.nextLine());
         return id;
+    }
+
+    public AlimentoRefeicao criaAlimentoRefeicao(Refeicoes refeicao) {
+        System.out.println("\nDigite o nome do alimento que comeu: ");
+        String nome = scanner.nextLine();
+        AlimentoDAO alimentoDAO = new AlimentoDAO();
+        AlimentoRefeicao alimentosRefeicao = new AlimentoRefeicao ();
+         alimentosRefeicao.setAlimento(alimentoDAO.buscaPorNome(nome));
+         alimentosRefeicao.setRefeicao(refeicao);
+         alimentosRefeicao.setCalorias(alimentosRefeicao.getAlimento().getCalorias());
+         alimentosRefeicao.setCarboidratos(alimentosRefeicao.getAlimento().getCarboidratos());
+         alimentosRefeicao.setPorcao(100);
+         alimentosRefeicao.setProteinas(alimentosRefeicao.getAlimento().getProteinas());
+         alimentosRefeicao.setGorduras(alimentosRefeicao.getAlimento().getGorduras());
+         refeicao.setCalorias(refeicao.getCalorias() + alimentosRefeicao.getCalorias());
+         refeicao.setProteinas(refeicao.getProteinas() + alimentosRefeicao.getProteinas());
+         refeicao.setCarboidratos(refeicao.getCarboidratos() + alimentosRefeicao.getCarboidratos());
+         refeicao.setGorduras(refeicao.getGorduras() + alimentosRefeicao.getGorduras());
+         return alimentosRefeicao;
     }
 }

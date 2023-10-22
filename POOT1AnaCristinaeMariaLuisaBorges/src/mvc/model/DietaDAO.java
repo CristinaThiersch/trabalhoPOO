@@ -13,8 +13,9 @@ public class DietaDAO {
     Dieta[] registros = new Dieta[50];
 
     public DietaDAO() {
-        
     }
+    
+    
 
     public boolean adiciona(Dieta registro) {
         int proximaPosicaoLivre = this.proximaPosicaoLivre();

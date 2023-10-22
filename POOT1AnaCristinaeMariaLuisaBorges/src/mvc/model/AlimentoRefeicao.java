@@ -17,6 +17,7 @@ public class AlimentoRefeicao {
     private double porcao;
     private double proteinas;
     private double gorduras;
+    private double carboidratos;
     private double calorias;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
@@ -74,6 +75,14 @@ public class AlimentoRefeicao {
         this.gorduras = gorduras;
     }
 
+    public double getCarboidratos() {
+        return carboidratos;
+    }
+
+    public void setCarboidratos(double carboidratos) {
+        this.carboidratos = carboidratos;
+    }
+
     public double getCalorias() {
         return calorias;
     }
@@ -93,7 +102,7 @@ public class AlimentoRefeicao {
     @Override
     public String toString() {
         return "\n========================================"
-                + "\nAlimentoRefeicao{" + "\nid=" + id + "\n refeicao=" + refeicao + "\n alimento=" + alimento + "\n porcao=" + porcao + "\n proteinas=" + proteinas + "\n gorduras=" + gorduras + "\n calorias=" + calorias + "\n dataCriacao=" + dataCriacao + ", dataModificacao=" + dataModificacao + '}';
+                + "\nAlimentoRefeicao{" + "\nid=" + id + "\n refeicao=" + refeicao.getNomeRefeicao() + "\n alimento=" + alimento.getNome() + '}';
     }
 
     
