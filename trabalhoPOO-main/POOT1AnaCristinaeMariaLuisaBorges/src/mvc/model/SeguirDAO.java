@@ -103,17 +103,17 @@ public class SeguirDAO {
         return true;
     }
 
-    public void mostrarTodos() {
+    public void mostrarTodos(Pessoa p) {
             
         boolean tem = false;
         for (Seguir seguir : seguindo) {
-            if (seguir != null) {
+            if (seguir != null  && seguir.getPessoaDestino() != p && seguir.getPessoaOrigem().equals(p)) {
                 System.out.println(seguir.toString());
                 tem = true;
             }
         }
         if (!tem) {
-            System.out.println("Não há mensagem cadastrada.");
+            System.out.println("Nao ha seguidores ainda.");
         }
     }
     
