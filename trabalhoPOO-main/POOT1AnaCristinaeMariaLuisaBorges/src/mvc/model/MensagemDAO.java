@@ -4,105 +4,152 @@
  */
 package mvc.model;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import teste.ConnectionFactory;
+
 /**
  *
- * @author Ana Cristina e Maria Luisa
+ * @author Ana Cristina e Maria Luisa -> MensagemDAO - Parte 2
  */
 public class MensagemDAO {
 
-    Mensagem[] mensagens = new Mensagem[100];
+    //Função para adicionar a mensagem
+    public long adicionaERetornaId(Mensagem elemento) {
+        String sql = "insert into mensagem "
+                + "(idpOrigem,idpDestino,mensagem,dataCriacao,dataModificacao)"
+                + " values (?,?,?,?,?)";
 
-    public MensagemDAO() {
-    }
-    
-    public MensagemDAO(PessoaDAO origem, PessoaDAO destino){
-        Pessoa p1 = origem.buscaPessoaLogin("ana", "teste");
-        Pessoa p2 = origem.buscaPessoaLogin("maria", "teste");
-        
-        Mensagem m1 = new Mensagem();
-        m1.setMensagem("Oi, como vai?");
-        m1.setPessoaOrigem(p1);
-        m1.setPessoaDestino(p2);
-        this.adiciona(m1);
-        
-        Mensagem m2 = new Mensagem();
-        m2.setMensagem("Vou bem e você?");
-        m2.setPessoaOrigem(p2);
-        m2.setPessoaDestino(p1); 
-        this.adiciona(m2);
-        
-        Mensagem m3 = new Mensagem();
-        m3.setMensagem("Você viu o vídeo da capybara? Capybara, capybara, capybara~");
-        m3.setPessoaOrigem(p1);
-        m3.setPessoaDestino(p2);
-        this.adiciona(m3);
-        
-        Mensagem m4 = new Mensagem();
-        m4.setMensagem("SIMMM! Uso a música desse vídeo para fazer meus treinos matinais, fico muito mais empolgada!");
-        m4.setPessoaOrigem(p2);
-        m4.setPessoaDestino(p1);
-        this.adiciona(m4);
-    }
-    
-    public boolean adiciona(Mensagem mensagem) {
-        int proximaPosicaoLivre = this.proximaPosicaoLivre();
-        if (proximaPosicaoLivre != -1) {
-            mensagens[proximaPosicaoLivre] = mensagem;
-            return true;
-        } else {
-            return false;
-        }
-    }
+        try (Connection connection = new ConnectionFactory().getConnection(); PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            // seta os valores
+            stmt.setLong(1, elemento.getPessoaOrigem().getId());
+            stmt.setLong(2, elemento.getPessoaDestino().getId());
+            stmt.setString(3, elemento.getMensagem());
+            stmt.setDate(4, java.sql.Date.valueOf(elemento.getDataCriacao()));
+            stmt.setDate(5, java.sql.Date.valueOf(elemento.getDataModificacao()));
 
-    public boolean ehVazio() {
-        for (Mensagem mensagem : mensagens) {
-            if (mensagem != null) {
-                return false;
+            stmt.execute();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            int retorno = 0;
+            if (rs.next()) {
+                retorno = rs.getInt(1);
             }
-        }
-        return true;
 
-    }
+            System.out.println("O id inserido foi: " + retorno);
+            elemento.setId(retorno);
 
-    public void mostrarTodos() {
-        boolean tem = false;
-        for (Mensagem mensagem : mensagens) {
-            if (mensagem != null) {
-                System.out.println(mensagem.toString());
-                tem = true;
-            }
-        }
-        if (!tem) {
-            System.out.println("Não há mensagem cadastrada.");
+            return retorno;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public String buscaPorMensagem(long id) {
-        for (Mensagem mensagem : mensagens) {
-            if (mensagem != null && mensagem.getId() == id) {
-                return mensagem.getMensagem();
+    //Função para mostrar todas as mensagens
+    public List<Mensagem> mostrarTodos(Mensagem elemento, Pessoa logada) {
+        String sql = "select * from mensagem";
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        List<Mensagem> mensagens = new ArrayList<>();
+
+        try (Connection connection = new ConnectionFactory().getConnection(); PreparedStatement ps = createPreparedStatement(connection, logada.getId()); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                if (logada.getId() == rs.getLong("idpOrigem") || logada.getId() == rs.getLong("idpDestino")) {
+                    Long id = rs.getLong("idmensagem");
+                    Long idOrigem = rs.getLong("idpOrigem");
+                    Long idDestino = rs.getLong("idpDestino");
+                    String mensagem = rs.getString("mensagem");
+                    Date createDate = rs.getDate("dataCriacao");
+                    LocalDate dataCriacao = createDate.toLocalDate();
+                    Date updateDate = rs.getDate("dataModificacao");
+                    LocalDate dataModificacao = updateDate.toLocalDate();
+
+                    Pessoa pessoaOrigem = pessoaDAO.buscaPorID(idOrigem);
+                    Pessoa pessoaDestino = pessoaDAO.buscaPorID(idDestino);
+
+                    Mensagem m = new Mensagem();
+                    m.setId(id);
+                    m.setPessoaOrigem(pessoaOrigem);
+                    m.setPessoaDestino(pessoaDestino);
+                    m.setMensagem(mensagem);
+                    m.setDataCriacao(dataCriacao);
+                    m.setDataModificacao(dataModificacao);
+                    mensagens.add(m);
+                }
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return mensagens;
+    }
+
+    //Função para buscar a mensagem pelo ID
+    public Mensagem buscaPorID(long code, Pessoa logada) {
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        try (Connection connection = new ConnectionFactory().getConnection(); PreparedStatement ps = createPreparedStatement(connection, logada.getId()); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                if (logada.getId() == rs.getLong("idpOrigem") || logada.getId() == rs.getLong("idpDestino")) {
+                    Long id = rs.getLong("idmensagem");
+                    Long idOrigem = rs.getLong("idpOrigem");
+                    Long idDestino = rs.getLong("idpDestino");
+                    String mensagem = rs.getString("mensagem");
+                    Date createDate = rs.getDate("dataCriacao");
+                    LocalDate dataCriacao = createDate.toLocalDate();
+                    Date updateDate = rs.getDate("dataModificacao");
+                    LocalDate dataModificacao = updateDate.toLocalDate();
+
+                    Pessoa pessoaOrigem = pessoaDAO.buscaPorID(idOrigem);
+                    Pessoa pessoaDestino = pessoaDAO.buscaPorID(idDestino);
+
+                    Mensagem m = new Mensagem();
+                    m.setId(id);
+                    m.setPessoaOrigem(pessoaOrigem);
+                    m.setPessoaDestino(pessoaDestino);
+                    m.setMensagem(mensagem);
+                    m.setDataCriacao(dataCriacao);
+                    m.setDataModificacao(dataModificacao);
+
+                    return m;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
 
-    public boolean remover(String mensagem) {
-        for (int i = 0; i < mensagens.length; i++) {
-            if (mensagens[i] != null && mensagens[i].getMensagem().equals(mensagem)) {
-                mensagens[i] = null;
-                return true;
-            }
-        }
-        return false;
+    //Config PreparedStatement
+    private PreparedStatement createPreparedStatement(Connection con, long id) throws SQLException {
+        String sql = "select * from mensagem where idpOrigem = ? or idpDestino = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setLong(1, id);
+        ps.setLong(2, id);
+        return ps;
     }
 
-    private int proximaPosicaoLivre() {
-        for (int i = 0; i < mensagens.length; i++) {
-            if (mensagens[i] == null) {
-                return i;
-            }
-        }
-        return -1;
+    //Função para excluir a mensagem
+    public Mensagem exclui(Mensagem elemento) {
+        String sql = "delete from mensagem where idmensagem = ?";
 
+        try (Connection connection = new ConnectionFactory().getConnection(); PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setLong(1, elemento.getId());
+
+            stmt.execute();
+
+            System.out.println("Elemento excluido com sucesso.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return elemento;
     }
 }
